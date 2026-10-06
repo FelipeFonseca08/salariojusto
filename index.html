@@ -7,9 +7,9 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
-:root{--bg:#EEF1EF;--surface:#fff;--ink:#12292D;--muted:#5E7074;--line:#DDE4E2;--brand:#0E6F6E;--brand-d:#0A5453;--brand-soft:#E2F1EF;--pos:#14804A;--neg:#B3402F;--warn:#FFF4DF;--warn-ink:#7A4F08;--hero:#0E3B3F;--shadow:0 1px 2px rgba(18,41,45,.06),0 8px 24px rgba(18,41,45,.06);box-sizing:border-box;padding-top:env(safe-area-inset-top,0px)}
-@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0B1517;--surface:#13242A;--ink:#E8F0EF;--muted:#93A7AA;--line:#223840;--brand:#3FB5B0;--brand-d:#2E9A96;--brand-soft:#173A3E;--pos:#4CC38A;--neg:#EE8A78;--warn:#3A2F14;--warn-ink:#F0C877;--hero:#0F4448;--shadow:0 1px 2px rgba(0,0,0,.4)}}
-:root[data-theme="dark"]{--bg:#0B1517;--surface:#13242A;--ink:#E8F0EF;--muted:#93A7AA;--line:#223840;--brand:#3FB5B0;--brand-d:#2E9A96;--brand-soft:#173A3E;--pos:#4CC38A;--neg:#EE8A78;--warn:#3A2F14;--warn-ink:#F0C877;--hero:#0F4448;--shadow:0 1px 2px rgba(0,0,0,.4)}
+:root{--bg:#EEF1EF;--surface:#fff;--ink:#12292D;--muted:#5E7074;--line:#DDE4E2;--brand:#0E6F6E;--brand-d:#0A5453;--brand-soft:#E2F1EF;--pos:#14804A;--neg:#B3402F;--warn:#FFF4DF;--warn-ink:#7A4F08;--hero:#0E3B3F;--hero2:#0F5457;--btn:#0E6F6E;--btn-d:#0A5453;color-scheme:light;--shadow:0 1px 2px rgba(18,41,45,.06),0 8px 24px rgba(18,41,45,.06);box-sizing:border-box;padding-top:env(safe-area-inset-top,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#070C0E;--surface:#111B20;--ink:#F5F9F8;--muted:#B6C5C7;--line:#385057;--brand:#72E3DC;--brand-d:#5BCFC8;--brand-soft:#11393C;--btn:#0F7F7B;--btn-d:#14948F;--pos:#72E5A8;--neg:#FFA08F;--warn:#352A0F;--warn-ink:#F8DA8E;--hero:#17504F;--hero2:#0A3033;--shadow:0 0 0 1px rgba(255,255,255,.04);color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#070C0E;--surface:#111B20;--ink:#F5F9F8;--muted:#B6C5C7;--line:#385057;--brand:#72E3DC;--brand-d:#5BCFC8;--brand-soft:#11393C;--btn:#0F7F7B;--btn-d:#14948F;--pos:#72E5A8;--neg:#FFA08F;--warn:#352A0F;--warn-ink:#F8DA8E;--hero:#17504F;--hero2:#0A3033;--shadow:0 0 0 1px rgba(255,255,255,.04);color-scheme:dark}
 *{margin:0;padding:0;box-sizing:border-box}
 html,body{min-height:100%}
 body{font-family:'Manrope',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;background:var(--bg);color:var(--ink);max-width:560px;margin:0 auto;font-size:15px;line-height:1.45;-webkit-font-smoothing:antialiased}
@@ -27,8 +27,8 @@ button{cursor:pointer}
 .dot{position:absolute;top:-5px;right:-5px;min-width:18px;height:18px;border-radius:9px;background:var(--neg);color:#fff;font-size:11px;font-weight:700;display:grid;place-items:center}
 .card{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:18px;box-shadow:var(--shadow);margin-bottom:16px}
 h3{font-size:13px;font-weight:700;color:var(--muted);margin-bottom:10px}
-.btn{width:100%;padding:15px;border:0;border-radius:12px;background:var(--brand);color:#fff;font-weight:700;font-size:16px}
-.btn:hover{background:var(--brand-d)}
+.btn{width:100%;padding:15px;border:0;border-radius:12px;background:var(--btn);color:#fff;font-weight:700;font-size:16px}
+.btn:hover{background:var(--btn-d)}
 .btn.sec{background:transparent;color:var(--brand);border:1.5px solid var(--brand)}
 .btn+.btn{margin-top:10px}
 
@@ -52,7 +52,7 @@ h3{font-size:13px;font-weight:700;color:var(--muted);margin-bottom:10px}
 .login h1{font-size:28px;font-weight:800;letter-spacing:-.01em;margin:28px 0 6px}
 .login .sub{color:var(--muted);margin-bottom:28px}
 .login .marca{color:var(--ink)}
-.login .marca i{background:var(--brand)}
+.login .marca i{background:var(--btn)}
 .login .marca svg{stroke:#fff}
 .campo{display:block;margin-bottom:14px}
 .campo span{display:block;font-size:13px;font-weight:600;margin-bottom:6px}
@@ -66,7 +66,7 @@ h3{font-size:13px;font-weight:700;color:var(--muted);margin-bottom:10px}
 .ola small{color:var(--muted);display:block}
 .ola h1{font-size:24px;font-weight:800}
 .ola .btns{display:flex;gap:10px}
-.saldo{background:var(--hero);color:#fff;border:0;text-align:left;width:100%;display:block}
+.saldo{background:linear-gradient(135deg,var(--hero),var(--hero2));color:#fff;border:0;text-align:left;width:100%;display:block}
 .saldo small{opacity:.75;font-weight:600}
 .saldo .v{font-size:38px;font-weight:800;letter-spacing:-.02em;margin:4px 0 2px}
 .saldo .d{font-size:13px;opacity:.8;margin-bottom:16px}
@@ -96,7 +96,7 @@ h3{font-size:13px;font-weight:700;color:var(--muted);margin-bottom:10px}
 /* simulador */
 .tabs{display:flex;gap:6px;padding:4px;background:var(--surface);border:1px solid var(--line);border-radius:14px;margin-bottom:16px}
 .tab{flex:1;padding:10px;border:0;border-radius:10px;background:none;font-weight:700;color:var(--muted)}
-.tab.on{background:var(--brand);color:#fff}
+.tab.on{background:var(--btn);color:#fff}
 .opts{display:grid;gap:8px;margin-bottom:14px}
 .opt{display:flex;gap:10px;align-items:center;padding:12px;border:1.5px solid var(--line);border-radius:12px;background:var(--surface);cursor:pointer}
 .opt:has(input:checked){border-color:var(--brand);background:var(--brand-soft)}
@@ -160,6 +160,24 @@ h3{font-size:13px;font-weight:700;color:var(--muted);margin-bottom:10px}
  .toast{bottom:32px;margin-left:124px}
 }
 @media (min-width:1280px){.tela:not(.cheia){margin-left:max(248px,calc((100vw - 1120px)/2 + 124px))}}
+/* ---------- Abertura ---------- */
+.rise{opacity:0;animation:rise .6s cubic-bezier(.2,.7,.2,1) forwards;animation-delay:var(--d,0s)}
+@keyframes rise{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+.feats{list-style:none;margin:28px 0 24px;display:grid;gap:12px}
+.feats li{display:flex;gap:14px;align-items:center;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.18);border-radius:16px;padding:14px 16px}
+.feats li i{flex:none;width:44px;height:44px;border-radius:12px;background:#fff;display:grid;place-items:center;animation:flut 3.4s ease-in-out infinite}
+.feats li:nth-child(2) i{animation-delay:.5s}.feats li:nth-child(3) i{animation-delay:1s}
+.feats svg{width:22px;height:22px;stroke:var(--hero);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.feats b{display:block;font-size:15px}.feats span{font-size:13px;opacity:.8}
+@keyframes flut{0%,100%{transform:translateY(0)}50%{transform:translateY(-3px)}}
+.btn-claro{transition:transform .2s}.btn-claro:hover{transform:translateY(-2px)}.btn-claro:active{transform:scale(.98)}
+@media (prefers-reduced-motion:reduce){.rise{opacity:1!important}}
+/* ---------- Transição entre páginas ---------- */
+.tela.ativa{animation:pg .3s cubic-bezier(.2,.7,.2,1)}
+.tela.ativa.volta{animation-name:pgv}
+@keyframes pg{from{opacity:0;transform:translateX(18px)}to{opacity:1;transform:none}}
+@keyframes pgv{from{opacity:0;transform:translateX(-18px)}to{opacity:1;transform:none}}
+@media (min-width:900px){.tela.ativa{animation-name:pgd}.tela.ativa.volta{animation-name:pgd}@keyframes pgd{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}}
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 </style>
 </head>
@@ -168,12 +186,15 @@ h3{font-size:13px;font-weight:700;color:var(--muted);margin-bottom:10px}
 <!-- Onboarding -->
 <section class="tela cheia ativa" id="t-onb" style="padding:0">
  <div class="hero-tela">
-  <div class="marca"><i><svg viewBox="0 0 24 24"><path d="M4 12l5 5L20 6"/></svg></i>Salário Justo</div>
+  <div class="marca rise" style="--d:0s"><i><svg viewBox="0 0 24 24"><path d="M4 12l5 5L20 6"/></svg></i>Salário Justo</div>
   <div>
-   <div class="slide"><h1 id="o-t"></h1><p id="o-d"></p></div>
-   <div class="mini" id="o-m"></div>
-   <div class="ind" id="o-i"><i></i><i></i><i></i></div>
-   <div class="acoes"><button class="pular" onclick="ir('t-login')">Pular</button><button class="btn-claro" onclick="proxOnb()" id="o-b">Continuar</button></div>
+   <div class="slide"><h1 class="rise" style="--d:.1s">Transparência no seu salário</h1><p class="rise" style="--d:.2s">Tudo o que você precisa para entender o seu holerite, em um só lugar.</p></div>
+   <ul class="feats">
+    <li class="rise" style="--d:.35s"><i><svg viewBox="0 0 24 24"><path d="M6 3h9l4 4v14H6zM14 3v5h5M9 13h7M9 17h7"/></svg></i><div><b>Seu salário sem letras miúdas</b><span>Entenda cada detalhe do holerite de forma clara.</span></div></li>
+    <li class="rise" style="--d:.5s"><i><svg viewBox="0 0 24 24"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg></i><div><b>Entenda cada desconto</b><span>INSS, IRRF e vale-transporte explicados passo a passo.</span></div></li>
+    <li class="rise" style="--d:.65s"><i><svg viewBox="0 0 24 24"><path d="M20 12a8 8 0 01-14 5.3M4 12a8 8 0 0114-5.3M18 3v4h-4M6 21v-4h4"/></svg></i><div><b>Dados do RH em tempo real</b><span>Seu holerite chega automaticamente, sem pedir ao RH.</span></div></li>
+   </ul>
+   <button class="btn-claro rise" style="--d:.8s;width:100%" onclick="ir('t-login')">Começar</button>
   </div>
  </div>
 </section>
@@ -334,20 +355,12 @@ REG.forEach(r=>{const d=document.createElement('div');d.className='lin';d.innerH
 
 /* ---- navegação ---- */
 const COM_NAV=['t-home','t-hol','t-he','t-sim','t-alertas'];
-function ir(id){document.querySelectorAll('.tela').forEach(t=>t.classList.remove('ativa'));$(id).classList.add('ativa');
+const ORD=['t-onb','t-login','t-home','t-hol','t-he','t-sim','t-alertas'];
+function ir(id){const at=document.querySelector('.tela.ativa'),ant=at?at.id:id;
+ document.querySelectorAll('.tela').forEach(t=>t.classList.remove('ativa','volta'));
+ const n=$(id);n.classList.toggle('volta',id==='t-home'&&ant!=='t-login'&&ant!=='t-home');n.classList.add('ativa');
  $('nav').classList.toggle('on',COM_NAV.includes(id));
  document.querySelectorAll('.nav button').forEach(b=>b.classList.toggle('on',b.dataset.t===id));scrollTo(0,0)}
-const ONB=[
- ['Seu salário, sem letras miúdas','Veja de onde vem cada centavo do seu holerite.',[['Bruto','R$ 3.298,95'],['Descontos','− R$ 575,58'],['Líquido','R$ 2.723,37']]],
- ['Entenda cada desconto','INSS, IRRF e vale-transporte explicados com o cálculo passo a passo.',[['INSS','Faixas de 7,5% a 14%'],['IRRF','Sobre bruto − INSS'],['VT','Até 6% do base']]],
- ['Dados do RH, em tempo real','Seu holerite chega automaticamente, sem pedir ao RH.',[['Holerite','Disponível no dia 5'],['Horas extras','Acompanhe a aprovação'],['Simuladores','Rescisão, férias e reajuste']]]];
-let oi=0;
-function proxOnb(){if(oi<2){oi++;pintaOnb()}else ir('t-login')}
-function pintaOnb(){const o=ONB[oi];$('o-t').textContent=o[0];$('o-d').textContent=o[1];
- $('o-m').innerHTML=o[2].map(x=>`<div><span>${x[0]}</span><b>${x[1]}</b></div>`).join('');
- [...$('o-i').children].forEach((e,i)=>e.classList.toggle('on',i===oi));
- $('o-b').textContent=oi<2?'Continuar':'Começar'}
-pintaOnb();
 
 /* ---- login ---- */
 $('cpf').addEventListener('input',e=>{let v=e.target.value.replace(/\D/g,'').slice(0,11);
