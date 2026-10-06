@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Salário Justo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#EEF1EF;--surface:#fff;--ink:#12292D;--muted:#5E7074;--line:#DDE4E2;--brand:#0E6F6E;--brand-d:#0A5453;--brand-soft:#E2F1EF;--pos:#14804A;--neg:#B3402F;--warn:#FFF4DF;--warn-ink:#7A4F08;--hero:#0E3B3F;--shadow:0 1px 2px rgba(18,41,45,.06),0 8px 24px rgba(18,41,45,.06);box-sizing:border-box;padding-top:env(safe-area-inset-top,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0B1517;--surface:#13242A;--ink:#E8F0EF;--muted:#93A7AA;--line:#223840;--brand:#3FB5B0;--brand-d:#2E9A96;--brand-soft:#173A3E;--pos:#4CC38A;--neg:#EE8A78;--warn:#3A2F14;--warn-ink:#F0C877;--hero:#0F4448;--shadow:0 1px 2px rgba(0,0,0,.4)}}
+:root[data-theme="dark"]{--bg:#0B1517;--surface:#13242A;--ink:#E8F0EF;--muted:#93A7AA;--line:#223840;--brand:#3FB5B0;--brand-d:#2E9A96;--brand-soft:#173A3E;--pos:#4CC38A;--neg:#EE8A78;--warn:#3A2F14;--warn-ink:#F0C877;--hero:#0F4448;--shadow:0 1px 2px rgba(0,0,0,.4)}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{min-height:100%}
+body{font-family:'Manrope',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;background:var(--bg);color:var(--ink);max-width:560px;margin:0 auto;font-size:15px;line-height:1.45;-webkit-font-smoothing:antialiased}
+button,input{font:inherit;color:inherit}
+button{cursor:pointer}
+:focus-visible{outline:3px solid var(--brand);outline-offset:2px}
+.num{font-variant-numeric:tabular-nums}
+.tela{display:none;min-height:100vh;background:var(--bg);padding:20px 20px calc(96px + env(safe-area-inset-bottom,0px))}
+.tela.ativa{display:block}
+.tela.cheia{padding-bottom:20px}
+.topo{display:flex;align-items:center;gap:12px;margin-bottom:20px}
+.topo h2{flex:1;font-size:20px;font-weight:700}
+.icon-btn{width:40px;height:40px;border-radius:12px;border:1px solid var(--line);background:var(--surface);display:grid;place-items:center;position:relative}
+.icon-btn svg,.nav button svg{width:22px;height:22px;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.dot{position:absolute;top:-5px;right:-5px;min-width:18px;height:18px;border-radius:9px;background:var(--neg);color:#fff;font-size:11px;font-weight:700;display:grid;place-items:center}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:18px;box-shadow:var(--shadow);margin-bottom:16px}
+h3{font-size:13px;font-weight:700;color:var(--muted);margin-bottom:10px}
+.btn{width:100%;padding:15px;border:0;border-radius:12px;background:var(--brand);color:#fff;font-weight:700;font-size:16px}
+.btn:hover{background:var(--brand-d)}
+.btn.sec{background:transparent;color:var(--brand);border:1.5px solid var(--brand)}
+.btn+.btn{margin-top:10px}
+
+/* onboarding + login */
+.hero-tela{display:flex;flex-direction:column;justify-content:space-between;min-height:100vh;background:var(--hero);color:#fff;padding:48px 24px 28px}
+.marca{display:flex;align-items:center;gap:10px;font-weight:800;font-size:18px}
+.marca i{width:34px;height:34px;border-radius:10px;background:#fff;display:grid;place-items:center}
+.marca svg{width:20px;height:20px;stroke:var(--hero);fill:none;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round}
+.slide h1{font-size:38px;line-height:1.08;font-weight:800;letter-spacing:-.02em;margin-bottom:14px}
+.slide p{font-size:17px;opacity:.82;max-width:34ch}
+.mini{margin-top:28px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.18);border-radius:16px;padding:16px;display:grid;gap:10px;font-size:14px}
+.mini div{display:flex;justify-content:space-between}
+.mini b{font-weight:700}
+.ind{display:flex;gap:6px;margin:24px 0 18px}
+.ind i{height:6px;width:6px;border-radius:3px;background:rgba(255,255,255,.35);transition:.25s}
+.ind i.on{width:26px;background:#fff}
+.acoes{display:flex;justify-content:space-between;align-items:center}
+.pular{background:none;border:0;color:#fff;opacity:.75;padding:12px 4px;font-weight:600}
+.btn-claro{background:#fff;color:var(--hero);border:0;border-radius:12px;padding:14px 26px;font-weight:700}
+.login{padding-top:56px}
+.login h1{font-size:28px;font-weight:800;letter-spacing:-.01em;margin:28px 0 6px}
+.login .sub{color:var(--muted);margin-bottom:28px}
+.login .marca{color:var(--ink)}
+.login .marca i{background:var(--brand)}
+.login .marca svg{stroke:#fff}
+.campo{display:block;margin-bottom:14px}
+.campo span{display:block;font-size:13px;font-weight:600;margin-bottom:6px}
+.campo input{width:100%;padding:14px;border:1.5px solid var(--line);border-radius:12px;background:var(--surface);font-size:16px}
+.campo input:focus{outline:none;border-color:var(--brand);box-shadow:0 0 0 3px var(--brand-soft)}
+.erro{color:var(--neg);font-size:13px;margin:-6px 0 10px;min-height:18px}
+.link{background:none;border:0;color:var(--brand);font-weight:600;margin-top:16px;display:block;width:100%;text-align:center}
+
+/* dashboard */
+.ola{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px}
+.ola small{color:var(--muted);display:block}
+.ola h1{font-size:24px;font-weight:800}
+.ola .btns{display:flex;gap:10px}
+.saldo{background:var(--hero);color:#fff;border:0;text-align:left;width:100%;display:block}
+.saldo small{opacity:.75;font-weight:600}
+.saldo .v{font-size:38px;font-weight:800;letter-spacing:-.02em;margin:4px 0 2px}
+.saldo .d{font-size:13px;opacity:.8;margin-bottom:16px}
+.bar{height:8px;border-radius:4px;background:rgba(255,255,255,.2);overflow:hidden}
+.bar i{display:block;height:100%;background:#fff;border-radius:4px}
+.bar-l{display:flex;justify-content:space-between;font-size:12px;opacity:.8;margin-top:8px}
+.atalhos{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:16px}
+.atalho{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:16px;text-align:left;display:flex;flex-direction:column;gap:10px;font-weight:700}
+.atalho span{width:38px;height:38px;border-radius:10px;background:var(--brand-soft);color:var(--brand);display:grid;place-items:center}
+.atalho svg{width:20px;height:20px;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.alerta{display:flex;gap:12px;align-items:flex-start;padding:14px;border-radius:12px;background:var(--brand-soft);margin-bottom:10px;font-size:14px}
+.alerta.w{background:var(--warn);color:var(--warn-ink)}
+.alerta b{display:block}
+
+/* holerite */
+.meta{display:grid;grid-template-columns:1fr 1fr;gap:12px;font-size:13px}
+.meta small{color:var(--muted);display:block}
+.meta b{font-weight:700}
+.lin{display:flex;justify-content:space-between;align-items:center;width:100%;padding:13px 0;background:none;border:0;border-bottom:1px solid var(--line);text-align:left}
+.lin:last-child{border-bottom:0}
+.lin em{font-style:normal;font-size:12px;color:var(--muted);display:block}
+.lin .p{color:var(--pos);font-weight:700}
+.lin .n{color:var(--neg);font-weight:700}
+.tot{display:flex;justify-content:space-between;align-items:baseline;padding-top:14px;margin-top:4px;border-top:2px solid var(--ink);font-weight:800}
+.tot span:last-child{font-size:24px;color:var(--brand)}
+
+/* simulador */
+.tabs{display:flex;gap:6px;padding:4px;background:var(--surface);border:1px solid var(--line);border-radius:14px;margin-bottom:16px}
+.tab{flex:1;padding:10px;border:0;border-radius:10px;background:none;font-weight:700;color:var(--muted)}
+.tab.on{background:var(--brand);color:#fff}
+.opts{display:grid;gap:8px;margin-bottom:14px}
+.opt{display:flex;gap:10px;align-items:center;padding:12px;border:1.5px solid var(--line);border-radius:12px;background:var(--surface);cursor:pointer}
+.opt:has(input:checked){border-color:var(--brand);background:var(--brand-soft)}
+.res{margin-top:16px}
+.aviso{font-size:12px;color:var(--muted);margin-top:12px}
+
+/* nav */
+.nav{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:560px;background:var(--surface);border-top:1px solid var(--line);display:none;justify-content:space-around;padding:8px 8px calc(8px + env(safe-area-inset-bottom,0px))}
+.nav.on{display:flex}
+.nav button{background:none;border:0;display:flex;flex-direction:column;align-items:center;gap:2px;padding:6px 12px;color:var(--muted);font-size:11px;font-weight:600;position:relative}
+.nav button.on{color:var(--brand)}
+
+/* modal/toast */
+.modal{position:fixed;inset:0;background:rgba(5,15,17,.55);display:none;align-items:flex-end;justify-content:center;z-index:50}
+.modal.on{display:flex}
+.sheet{background:var(--surface);width:100%;max-width:480px;border-radius:20px 20px 0 0;padding:24px 20px calc(24px + env(safe-area-inset-bottom,0px));animation:up .25s ease}
+@keyframes up{from{transform:translateY(40px);opacity:0}to{transform:none;opacity:1}}
+.sheet h3{font-size:19px;color:var(--ink);margin-bottom:8px}
+.sheet p{color:var(--muted);margin-bottom:14px}
+.calc{background:var(--bg);border-radius:10px;padding:12px;font-size:14px;margin-bottom:16px;font-variant-numeric:tabular-nums}
+.toast{position:fixed;left:50%;bottom:100px;transform:translateX(-50%);background:var(--ink);color:var(--bg);padding:10px 16px;border-radius:10px;font-size:14px;font-weight:600;opacity:0;pointer-events:none;transition:.25s;z-index:60}
+.toast.on{opacity:1}
+
+/* ---------- Responsivo ---------- */
+.tela{min-height:100dvh}.hero-tela{min-height:100dvh}
+@media (max-width:360px){
+ .tela{padding-left:14px;padding-right:14px}
+ .slide h1{font-size:30px}.saldo .v{font-size:30px}
+ .atalhos{gap:8px}.atalho{padding:12px}.nav button{padding:6px 6px;font-size:10px}
+ .meta{grid-template-columns:1fr}
+}
+@media (max-height:640px){.hero-tela{padding-top:24px;gap:16px}.mini{margin-top:16px}.ind{margin:14px 0 10px}}
+@media (min-width:600px) and (max-width:899px){
+ .tela{padding-left:28px;padding-right:28px}
+ .atalhos{grid-template-columns:repeat(4,1fr)}
+ .modal{align-items:center}.sheet{border-radius:20px;max-width:440px}
+}
+@media (min-width:900px){
+ body{max-width:none}
+ .nav{top:0;bottom:0;left:0;transform:none;width:248px;max-width:none;flex-direction:column;justify-content:flex-start;gap:4px;padding:28px 14px;border-top:0;border-right:1px solid var(--line)}
+ .nav.on::before{content:'Salário Justo';font-weight:800;font-size:18px;padding:0 14px 22px}
+ .nav button{flex-direction:row;gap:12px;font-size:15px;padding:12px 14px;border-radius:10px;justify-content:flex-start;width:100%}
+ .nav button:hover{background:var(--brand-soft)}
+ .nav button.on{background:var(--brand-soft)}
+ .tela{padding:36px 48px 48px}
+ .tela:not(.cheia){margin-left:248px;max-width:1120px}
+ #t-he,#t-sim,#t-alertas{max-width:760px}
+ .tela.cheia{margin-left:0;max-width:none}
+ .tela.login{max-width:440px;margin:0 auto}
+ .hero-tela{align-items:center;padding:56px 24px}
+ .hero-tela>*{width:100%;max-width:520px}
+ .slide h1{font-size:46px}
+ .ola h1{font-size:30px}
+ .saldo .v{font-size:46px}
+ .atalhos{grid-template-columns:repeat(4,1fr);gap:16px}
+ .btn{max-width:420px}
+ #t-hol.ativa{display:grid;grid-template-columns:1fr 1fr;gap:0 24px;align-items:start}
+ #t-hol>*{grid-column:1/-1}
+ #t-hol>.card:not(.meta){grid-column:auto}
+ .modal{align-items:center}.sheet{border-radius:20px;max-width:440px}
+ .toast{bottom:32px;margin-left:124px}
+}
+@media (min-width:1280px){.tela:not(.cheia){margin-left:max(248px,calc((100vw - 1120px)/2 + 124px))}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+
+<!-- Onboarding -->
+<section class="tela cheia ativa" id="t-onb" style="padding:0">
+ <div class="hero-tela">
+  <div class="marca"><i><svg viewBox="0 0 24 24"><path d="M4 12l5 5L20 6"/></svg></i>Salário Justo</div>
+  <div>
+   <div class="slide"><h1 id="o-t"></h1><p id="o-d"></p></div>
+   <div class="mini" id="o-m"></div>
+   <div class="ind" id="o-i"><i></i><i></i><i></i></div>
+   <div class="acoes"><button class="pular" onclick="ir('t-login')">Pular</button><button class="btn-claro" onclick="proxOnb()" id="o-b">Continuar</button></div>
+  </div>
+ </div>
+</section>
+
+<!-- Login -->
+<section class="tela cheia login" id="t-login">
+ <div class="marca"><i><svg viewBox="0 0 24 24"><path d="M4 12l5 5L20 6"/></svg></i>Salário Justo</div>
+ <h1>Acesse seu holerite</h1>
+ <p class="sub">Use o CPF e a senha cadastrados no RH da sua empresa.</p>
+ <label class="campo"><span>CPF</span><input id="cpf" inputmode="numeric" placeholder="000.000.000-00" maxlength="14" autocomplete="username"></label>
+ <label class="campo"><span>Senha</span><input id="senha" type="password" placeholder="Sua senha" autocomplete="current-password"></label>
+ <p class="erro" id="erro"></p>
+ <button class="btn" onclick="entrar()">Entrar</button>
+ <button class="btn sec" onclick="toast('Leitor de QR Code em breve')">Entrar com QR Code da empresa</button>
+ <button class="link" onclick="toast('Enviamos um link ao e-mail cadastrado')">Esqueci minha senha</button>
+</section>
+
+<!-- Dashboard -->
+<section class="tela" id="t-home">
+ <div class="ola">
+  <div><small>Bom dia,</small><h1>Maria Silva</h1></div>
+  <div class="btns">
+   <button class="icon-btn" aria-label="Notificações" onclick="ir('t-alertas')"><svg viewBox="0 0 24 24"><path d="M6 8a6 6 0 1112 0c0 7 3 7 3 9H3c0-2 3-2 3-9zM10 21h4"/></svg><span class="dot">2</span></button>
+   <button class="icon-btn" aria-label="Alternar tema" onclick="tema()"><svg viewBox="0 0 24 24"><path d="M21 13A9 9 0 1111 3a7 7 0 0010 10z"/></svg></button>
+  </div>
+ </div>
+ <button class="card saldo" onclick="ir('t-hol')">
+  <small>Líquido de julho de 2024</small>
+  <div class="v num" id="h-liq"></div>
+  <div class="d num" id="h-det"></div>
+  <div class="bar"><i id="h-bar"></i></div>
+  <div class="bar-l"><span>Você recebe</span><span id="h-pct"></span></div>
+ </button>
+ <div class="atalhos">
+  <button class="atalho" onclick="ir('t-hol')"><span><svg viewBox="0 0 24 24"><path d="M6 3h9l4 4v14H6zM14 3v5h5M9 13h7M9 17h7"/></svg></span>Holerite</button>
+  <button class="atalho" onclick="ir('t-he')"><span><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></span>Horas extras</button>
+  <button class="atalho" onclick="ir('t-sim')"><span><svg viewBox="0 0 24 24"><rect x="5" y="3" width="14" height="18" rx="2"/><path d="M8 7h8M8 12h2M12 12h2M8 16h2M12 16h2"/></svg></span>Simuladores</button>
+  <button class="atalho" onclick="toast('Comparativo anual em breve')"><span><svg viewBox="0 0 24 24"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg></span>Comparativo</button>
+ </div>
+ <h3>Avisos</h3>
+ <div class="alerta"><div><b>Pagamento confirmado</b>Seu salário será depositado em 05/07.</div></div>
+ <div class="alerta w"><div><b>Horas extras em análise</b>12 horas aguardam aprovação do gestor.</div></div>
+</section>
+
+<!-- Holerite -->
+<section class="tela" id="t-hol">
+ <div class="topo"><button class="icon-btn" aria-label="Voltar" onclick="ir('t-home')"><svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></svg></button><h2>Holerite · Julho 2024</h2></div>
+ <div class="card meta">
+  <div><small>Empresa</small><b>Tech SA</b></div><div><small>Cargo</small><b>Desenvolvedora</b></div>
+  <div><small>Período</small><b>01/07 a 31/07</b></div><div><small>Pagamento</small><b>05/08</b></div>
+ </div>
+ <div class="card"><h3>Vencimentos</h3><div id="h-venc"></div></div>
+ <div class="card"><h3>Descontos</h3><div id="h-desc"></div>
+  <div class="tot"><span>Líquido a receber</span><span class="num" id="h-liq2"></span></div></div>
+ <p class="aviso" style="margin:-4px 0 14px">Toque em qualquer item para ver como o valor foi calculado. Valores estimativos com base nas tabelas de INSS e IRRF de 2024.</p>
+ <button class="btn" onclick="toast('PDF baixado')">Baixar PDF</button>
+ <button class="btn sec" onclick="toast('Link de compartilhamento copiado')">Compartilhar</button>
+</section>
+
+<!-- Horas extras -->
+<section class="tela" id="t-he">
+ <div class="topo"><button class="icon-btn" aria-label="Voltar" onclick="ir('t-home')"><svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></svg></button><h2>Horas extras</h2></div>
+ <div class="card saldo" style="cursor:default"><small>Total no mês</small><div class="v num" id="e-h"></div><div class="d num" id="e-v" style="margin:0"></div></div>
+ <div class="card"><h3>Registros</h3><div id="e-l"></div></div>
+ <div class="alerta w"><div><b>Limite legal</b>A CLT permite até 2 horas extras por dia (art. 59).</div></div>
+</section>
+
+<!-- Simulador -->
+<section class="tela" id="t-sim">
+ <div class="topo"><button class="icon-btn" aria-label="Voltar" onclick="ir('t-home')"><svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></svg></button><h2>Simuladores</h2></div>
+ <div class="tabs" role="tablist">
+  <button class="tab on" onclick="aba('resc',this)">Rescisão</button>
+  <button class="tab" onclick="aba('fer',this)">Férias</button>
+  <button class="tab" onclick="aba('rea',this)">Reajuste</button>
+ </div>
+ <div id="a-resc">
+  <div class="opts">
+   <label class="opt"><input type="radio" name="tp" value="sem" checked>Demissão sem justa causa</label>
+   <label class="opt"><input type="radio" name="tp" value="ped">Pedido de demissão</label>
+   <label class="opt"><input type="radio" name="tp" value="aco">Acordo entre as partes</label>
+  </div>
+  <label class="campo"><span>Data de admissão</span><input type="date" id="r-adm" value="2022-03-15"></label>
+  <label class="campo"><span>Data de saída</span><input type="date" id="r-sai" value="2024-07-31"></label>
+  <label class="campo"><span>Salário bruto (R$)</span><input type="number" id="r-sal" value="3800" step="0.01" inputmode="decimal"></label>
+  <button class="btn" onclick="calcResc()">Calcular rescisão</button>
+ </div>
+ <div id="a-fer" style="display:none">
+  <label class="campo"><span>Salário bruto (R$)</span><input type="number" id="f-sal" value="3800" step="0.01" inputmode="decimal"></label>
+  <label class="campo"><span>Dias de férias</span><input type="number" id="f-dias" value="30" min="5" max="30"></label>
+  <label class="opt" style="margin-bottom:14px"><input type="checkbox" id="f-abono">Vender 10 dias (abono pecuniário)</label>
+  <button class="btn" onclick="calcFer()">Calcular férias</button>
+ </div>
+ <div id="a-rea" style="display:none">
+  <label class="campo"><span>Salário atual (R$)</span><input type="number" id="a-sal" value="3800" step="0.01" inputmode="decimal"></label>
+  <label class="campo"><span>Reajuste (%)</span><input type="number" id="a-pct" value="5" step="0.1" inputmode="decimal"></label>
+  <button class="btn" onclick="calcRea()">Calcular reajuste</button>
+ </div>
+ <div class="card res" id="res" style="display:none"></div>
+ <p class="aviso">Simulação aproximada, sem impostos sobre verbas rescisórias. Confirme os valores com o RH.</p>
+</section>
+
+<!-- Alertas -->
+<section class="tela" id="t-alertas">
+ <div class="topo"><button class="icon-btn" aria-label="Voltar" onclick="ir('t-home')"><svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></svg></button><h2>Notificações</h2></div>
+ <div class="alerta"><div><b>Pagamento confirmado</b>Seu salário será depositado em 05/07.</div></div>
+ <div class="alerta w"><div><b>Horas extras em análise</b>12 horas aguardam aprovação do gestor.</div></div>
+ <div class="alerta"><div><b>Holerite disponível</b>O holerite de julho já pode ser consultado.</div></div>
+</section>
+
+<nav class="nav" id="nav">
+ <button data-t="t-home" onclick="ir('t-home')"><svg viewBox="0 0 24 24"><path d="M3 11l9-8 9 8M5 10v10h14V10"/></svg>Início</button>
+ <button data-t="t-hol" onclick="ir('t-hol')"><svg viewBox="0 0 24 24"><path d="M6 3h9l4 4v14H6zM14 3v5h5M9 13h7M9 17h7"/></svg>Holerite</button>
+ <button data-t="t-sim" onclick="ir('t-sim')"><svg viewBox="0 0 24 24"><rect x="5" y="3" width="14" height="18" rx="2"/><path d="M8 7h8M8 12h2M12 12h2M8 16h2M12 16h2"/></svg>Simular</button>
+ <button data-t="t-alertas" onclick="ir('t-alertas')"><svg viewBox="0 0 24 24"><path d="M6 8a6 6 0 1112 0c0 7 3 7 3 9H3c0-2 3-2 3-9zM10 21h4"/></svg>Avisos</button>
+ <button onclick="toast('Perfil em breve')"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/></svg>Perfil</button>
+</nav>
+
+<div class="modal" id="modal" onclick="if(event.target===this)fechar()">
+ <div class="sheet" role="dialog" aria-modal="true"><h3 id="m-t"></h3><p id="m-d"></p><div class="calc" id="m-c"></div><button class="btn" onclick="fechar()">Entendi</button></div>
+</div>
+<div class="toast" id="toast" role="status"></div>
+
+<script>
+const R=v=>v.toLocaleString('pt-BR',{style:'currency',currency:'BRL'});
+const $=id=>document.getElementById(id);
+const SAL=3000;
+
+/* ---- dados do holerite (tudo calculado, nada fixo) ---- */
+const HORA=SAL/220, REG=[
+ {d:'15/07 · seg',h:2,p:50},{d:'16/07 · ter',h:2,p:50},{d:'17/07 · qua',h:2,p:50},
+ {d:'18/07 · qui',h:2,p:50},{d:'19/07 · sex',h:2,p:50},{d:'21/07 · dom',h:2,p:100}];
+const vReg=r=>r.h*HORA*(1+r.p/100);
+const HE=REG.reduce((s,r)=>s+vReg(r),0), HORAS=REG.reduce((s,r)=>s+r.h,0);
+const DSR=HE/26*4, BRUTO=SAL+HE+DSR;
+function inss(b){const f=[[1412,.075],[2666.68,.09],[4000.03,.12],[7786.02,.14]];let t=0,a=0;for(const[l,p]of f){if(b>a){t+=(Math.min(b,l)-a)*p;a=l}}return t}
+const INSS=inss(BRUTO), BASE=BRUTO-INSS;
+const IRRF=Math.max(0,BASE>3751.05?BASE*.225-662.77:BASE>2826.65?BASE*.15-381.44:BASE>2259.20?BASE*.075-169.44:0);
+const VT=SAL*.06, DESC=INSS+IRRF+VT, LIQ=BRUTO-DESC;
+
+const VENC=[
+ ['Salário base',SAL,'Valor fixo mensal definido em contrato.',`${R(SAL)} (30 dias)`],
+ ['Horas extras',HE,'Horas além da jornada, com adicional de 50% (dias úteis) ou 100% (domingos).',`Valor da hora: ${R(SAL)} ÷ 220 = ${R(HORA)}\n${HORAS} h com adicional = ${R(HE)}`],
+ ['DSR sobre extras',DSR,'Descanso semanal remunerado: reflexo das horas extras nos domingos e feriados.',`${R(HE)} ÷ 26 dias úteis × 4 descansos = ${R(DSR)}`]];
+const DESCS=[
+ ['INSS',INSS,'Contribuição previdenciária. A alíquota é progressiva: cada faixa do salário tem seu percentual.',`Bruto ${R(BRUTO)}\n7,5% + 9% + 12% por faixa = ${R(INSS)}`],
+ ['IRRF',IRRF,'Imposto de renda retido na fonte, calculado sobre o bruto menos o INSS.',`Base: ${R(BASE)}\n15% − dedução de R$ 381,44 = ${R(IRRF)}`],
+ ['Vale-transporte',VT,'Desconto de até 6% do salário base.',`${R(SAL)} × 6% = ${R(VT)}`]];
+
+function linha(i,c){const[n,v,d,k]=i;const b=document.createElement('button');b.className='lin';b.innerHTML=`<span>${n}<em>Ver cálculo</em></span><span class="num ${c}">${c==='n'?'− ':''}${R(v)}</span>`;b.onclick=()=>abrir(n,d,k);return b}
+VENC.forEach(i=>$('h-venc').append(linha(i,'p')));
+DESCS.forEach(i=>$('h-desc').append(linha(i,'n')));
+$('h-liq').textContent=$('h-liq2').textContent=R(LIQ);
+$('h-det').textContent=`Bruto ${R(BRUTO)} · Descontos ${R(DESC)}`;
+$('h-bar').style.width=(LIQ/BRUTO*100)+'%';
+$('h-pct').textContent=(LIQ/BRUTO*100).toFixed(0)+'% do bruto';
+$('e-h').textContent=HORAS+' horas';$('e-v').textContent='Valor bruto: '+R(HE);
+REG.forEach(r=>{const d=document.createElement('div');d.className='lin';d.innerHTML=`<span>${r.d}<em>${r.h} h com ${r.p}%</em></span><span class="num p">${R(vReg(r))}</span>`;$('e-l').append(d)});
+
+/* ---- navegação ---- */
+const COM_NAV=['t-home','t-hol','t-he','t-sim','t-alertas'];
+function ir(id){document.querySelectorAll('.tela').forEach(t=>t.classList.remove('ativa'));$(id).classList.add('ativa');
+ $('nav').classList.toggle('on',COM_NAV.includes(id));
+ document.querySelectorAll('.nav button').forEach(b=>b.classList.toggle('on',b.dataset.t===id));scrollTo(0,0)}
+const ONB=[
+ ['Seu salário, sem letras miúdas','Veja de onde vem cada centavo do seu holerite.',[['Bruto','R$ 3.298,95'],['Descontos','− R$ 575,58'],['Líquido','R$ 2.723,37']]],
+ ['Entenda cada desconto','INSS, IRRF e vale-transporte explicados com o cálculo passo a passo.',[['INSS','Faixas de 7,5% a 14%'],['IRRF','Sobre bruto − INSS'],['VT','Até 6% do base']]],
+ ['Dados do RH, em tempo real','Seu holerite chega automaticamente, sem pedir ao RH.',[['Holerite','Disponível no dia 5'],['Horas extras','Acompanhe a aprovação'],['Simuladores','Rescisão, férias e reajuste']]]];
+let oi=0;
+function proxOnb(){if(oi<2){oi++;pintaOnb()}else ir('t-login')}
+function pintaOnb(){const o=ONB[oi];$('o-t').textContent=o[0];$('o-d').textContent=o[1];
+ $('o-m').innerHTML=o[2].map(x=>`<div><span>${x[0]}</span><b>${x[1]}</b></div>`).join('');
+ [...$('o-i').children].forEach((e,i)=>e.classList.toggle('on',i===oi));
+ $('o-b').textContent=oi<2?'Continuar':'Começar'}
+pintaOnb();
+
+/* ---- login ---- */
+$('cpf').addEventListener('input',e=>{let v=e.target.value.replace(/\D/g,'').slice(0,11);
+ v=v.replace(/(\d{3})(\d)/,'$1.$2').replace(/(\d{3})(\d)/,'$1.$2').replace(/(\d{3})(\d{1,2})$/,'$1-$2');e.target.value=v});
+function entrar(){const c=$('cpf').value.replace(/\D/g,'');
+ if(c.length!==11){$('erro').textContent='Digite um CPF com 11 números.';return}
+ if(!$('senha').value){$('erro').textContent='Digite sua senha.';return}
+ $('erro').textContent='';ir('t-home')}
+
+/* ---- modal, toast, tema ---- */
+function abrir(t,d,c){$('m-t').textContent=t;$('m-d').textContent=d;$('m-c').innerText=c;$('modal').classList.add('on')}
+function fechar(){$('modal').classList.remove('on')}
+document.addEventListener('keydown',e=>{if(e.key==='Escape')fechar()});
+let tt;function toast(m){const e=$('toast');e.textContent=m;e.classList.add('on');clearTimeout(tt);tt=setTimeout(()=>e.classList.remove('on'),2200)}
+function tema(){const r=document.documentElement,esc=matchMedia('(prefers-color-scheme:dark)').matches;
+ const atual=r.dataset.theme||(esc?'dark':'light');const novo=atual==='dark'?'light':'dark';r.dataset.theme=novo;
+ try{localStorage.setItem('sj-tema',novo)}catch(e){}}
+try{const s=localStorage.getItem('sj-tema');if(s)document.documentElement.dataset.theme=s}catch(e){}
+
+/* ---- simuladores ---- */
+function aba(k,b){document.querySelectorAll('.tab').forEach(t=>t.classList.remove('on'));b.classList.add('on');
+ ['resc','fer','rea'].forEach(x=>$('a-'+x).style.display=x===k?'block':'none');$('res').style.display='none'}
+function mostra(t,itens,total,lt){$('res').innerHTML=`<h3>${t}</h3>`+itens.map(i=>`<div class="lin"><span>${i[0]}</span><span class="num">${R(i[1])}</span></div>`).join('')+`<div class="tot"><span>${lt}</span><span class="num">${R(total)}</span></div>`;
+ $('res').style.display='block';$('res').scrollIntoView({behavior:'smooth',block:'center'})}
+function calcResc(){const s=+$('r-sal').value,a=new Date($('r-adm').value),f=new Date($('r-sai').value),tp=document.querySelector('[name=tp]:checked').value;
+ if(!s||isNaN(a)||isNaN(f)||f<a){toast('Confira as datas e o salário');return}
+ const meses=(f.getFullYear()-a.getFullYear())*12+f.getMonth()-a.getMonth()+(f.getDate()>=a.getDate()?0:-1);
+ const anos=Math.floor(meses/12), mAq=meses%12;
+ const saldo=s/30*Math.min(f.getDate(),30), dec=s/12*(f.getMonth()+1);
+ const fer=s/12*mAq, terco=fer/3;
+ const aviso=tp==='sem'?s/30*Math.min(30+3*anos,90):tp==='aco'?s/30*Math.min(30+3*anos,90)/2:0;
+ const fgts=s*.08*Math.max(meses,0), multa=tp==='sem'?fgts*.4:tp==='aco'?fgts*.2:0;
+ const it=[['Saldo de salário',saldo],['13º proporcional',dec],['Férias proporcionais + 1/3',fer+terco]];
+ if(aviso)it.push(['Aviso prévio indenizado',aviso]);
+ if(multa)it.push([`Multa do FGTS (${tp==='sem'?'40':'20'}%)`,multa]);
+ mostra('Resultado estimado',it,it.reduce((x,i)=>x+i[1],0),'Total estimado')}
+function calcFer(){const s=+$('f-sal').value,d=Math.min(30,Math.max(5,+$('f-dias').value||30)),ab=$('f-abono').checked;
+ if(!s){toast('Informe o salário');return}
+ const base=s/30*d,terco=base/3,it=[[`Férias (${d} dias)`,base],['Adicional de 1/3',terco]];
+ if(ab){it.push(['Abono (10 dias + 1/3)',s/30*10*4/3])}
+ mostra('Resultado estimado',it,it.reduce((x,i)=>x+i[1],0),'Total bruto')}
+function calcRea(){const s=+$('a-sal').value,p=+$('a-pct').value;if(!s){toast('Informe o salário');return}
+ const n=s*(1+p/100);mostra('Resultado',[['Salário atual',s],['Aumento',n-s]],n,'Novo salário')}
+</script>
+</body>
+</html>
