@@ -525,6 +525,9 @@ input[type=date],input[type=month]{-webkit-appearance:none;appearance:none}
  #t-perfil .card,#t-emp-perfil .card{padding:6px 12px;margin-bottom:6px}
  #t-perfil .btn,#t-emp-perfil .btn{padding:8px;margin-bottom:6px}
 }
+/* botão de novo funcionário só na aba Trabalhador; início da empresa com 2 atalhos */
+#t-emp-home .atalhos{grid-template-columns:repeat(2,minmax(0,1fr))}
+@media (max-width:1179px){#t-emp:not([data-v="trab"]) #em-novo{display:none}}
 /* personalizar menu */
 .mn-i{padding:6px 0}
 .mn-s{display:flex;gap:6px;margin-left:12px}
@@ -755,7 +758,6 @@ input[type=date],input[type=month]{-webkit-appearance:none;appearance:none}
   <div class="bar-l"><span>Vai para os funcionários</span><span id="eh-pct"></span></div>
  </button>
  <div class="atalhos">
-  <button class="atalho" onclick="ir('t-emp-add')"><span><svg viewBox="0 0 24 24"><circle cx="10" cy="8" r="4"/><path d="M2 21c0-4 3.5-6 8-6M18 9v6M15 12h6"/></svg></span><b class="lg">Adicionar funcionário</b><b class="sm">Adicionar</b></button>
   <button class="atalho" onclick="ir('t-emp')"><span><svg viewBox="0 0 24 24"><path d="M6 3h9l4 4v14H6zM14 3v5h5M9 13h7M9 17h7"/></svg></span><b class="lg">Folha de pagamento</b><b class="sm">Folha</b></button>
   <button class="atalho" onclick="ir('t-emp-custo')"><span><svg viewBox="0 0 24 24"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg></span><b class="lg">Custo com funcionários</b><b class="sm">Custos</b></button>
    </div>
@@ -764,7 +766,7 @@ input[type=date],input[type=month]{-webkit-appearance:none;appearance:none}
 
 <!-- Área da empresa: adicionar funcionário -->
 <section class="tela" id="t-emp-add">
- <div class="topo"><button class="icon-btn" aria-label="Voltar" onclick="ir('t-emp-home')"><svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></svg></button><h2>Adicionar funcionário</h2></div>
+ <div class="topo"><button class="icon-btn" aria-label="Voltar" onclick="ir('t-emp')"><svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></svg></button><h2>Adicionar funcionário</h2></div>
  <div class="card">
   <label class="campo"><span>Nome completo</span><input id="ad-nome" type="text" autocomplete="off"></label>
   <div class="duo"><label class="campo"><span>CPF</span><input id="ad-cpf" inputmode="numeric" maxlength="14" placeholder="000.000.000-00" autocomplete="off"></label><label class="campo"><span>Matrícula</span><input id="ad-mat" type="text" inputmode="numeric" autocomplete="off"></label></div>
@@ -789,7 +791,7 @@ input[type=date],input[type=month]{-webkit-appearance:none;appearance:none}
 <section class="tela" id="t-emp" data-v="trab" oninput="pintaEmp()" onchange="pintaEmp()">
  <div class="topo com-tabs"><h2>Folha de pagamento</h2><span class="pill">Área da empresa</span>
   <div class="tabs mob-only" role="tablist"><button class="tab on" onclick="vista('t-emp','trab',this)">Trabalhador</button><button class="tab" onclick="vista('t-emp','venc',this)">Vencimentos</button><button class="tab" onclick="vista('t-emp','desc',this)">Descontos</button></div></div>
- <div class="func-bar"><label class="campo"><span>Funcionário</span><select id="em-func" onchange="selFunc(this.value)" aria-label="Escolher funcionário"></select></label><button class="btn sec" type="button" onclick="ir('t-emp-add')">+ Novo</button><button class="btn sec perigo" id="em-del" type="button" onclick="excluiFunc()" aria-label="Excluir funcionário"><svg viewBox="0 0 24 24"><path d="M4 7h16M10 11v6M14 11v6M6 7l1 13h10l1-13M9 7V4h6v3"/></svg><span>Excluir</span></button></div>
+ <div class="func-bar"><label class="campo"><span>Funcionário</span><select id="em-func" onchange="selFunc(this.value)" aria-label="Escolher funcionário"></select></label><button class="btn sec" id="em-novo" type="button" onclick="ir('t-emp-add')">+ Novo</button><button class="btn sec perigo" id="em-del" type="button" onclick="excluiFunc()" aria-label="Excluir funcionário"><svg viewBox="0 0 24 24"><path d="M4 7h16M10 11v6M14 11v6M6 7l1 13h10l1-13M9 7V4h6v3"/></svg><span>Excluir</span></button></div>
  <p class="hint">Escolha o funcionário e lance os valores. Ao salvar, o holerite, as horas extras e o comparativo dele passam a mostrar estes dados.</p>
  <div class="emp-grid">
   <div class="card ep ep-trab"><h3>Trabalhador</h3>
@@ -836,7 +838,6 @@ input[type=date],input[type=month]{-webkit-appearance:none;appearance:none}
   <label class="lin sw"><span>Modo escuro<em>Alterna entre claro e escuro</em></span><input type="checkbox" id="pe-tema" onchange="tema()"></label>
   <button class="lin" type="button" onclick="abreMenu()"><span>Personalizar menu<em>Ordem do menu e página inicial</em></span><span class="num">›</span></button>
  </div>
- <button class="btn sec" onclick="restauraEmp()">Restaurar dados de exemplo</button>
  <button class="btn sec" onclick="sair()">Sair da conta</button>
 </section>
 
@@ -860,7 +861,6 @@ input[type=date],input[type=month]{-webkit-appearance:none;appearance:none}
 
 <nav class="nav" id="nav-emp">
  <button data-t="t-emp-home" onclick="ir('t-emp-home')"><svg viewBox="0 0 24 24"><path d="M3 11l9-8 9 8M5 10v10h14V10"/></svg>Início</button>
- <button data-t="t-emp-add" onclick="ir('t-emp-add')"><svg viewBox="0 0 24 24"><circle cx="10" cy="8" r="4"/><path d="M2 21c0-4 3.5-6 8-6M18 9v6M15 12h6"/></svg>Adicionar</button>
  <button data-t="t-emp-custo" onclick="ir('t-emp-custo')"><svg viewBox="0 0 24 24"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg><span class="lg">Custo com funcionários</span><span class="sm">Custos</span></button>
  <button data-t="t-emp" onclick="ir('t-emp')"><svg viewBox="0 0 24 24"><path d="M6 3h9l4 4v14H6zM14 3v5h5M9 13h7M9 17h7"/></svg><span class="lg">Folha de pagamento</span><span class="sm">Folha</span></button>
  <button data-t="t-emp-perfil" onclick="ir('t-emp-perfil')"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/></svg>Perfil</button>
@@ -983,7 +983,7 @@ function ir(id){const at=document.querySelector('.tela.ativa'),ant=at?at.id:id;
  if(id==='t-emp-add')$('ad-erro').textContent='';
  $('nav').classList.toggle('on',TELAS_TRAB.includes(id));
  $('nav-emp').classList.toggle('on',TELAS_EMP.includes(id));
- document.querySelectorAll('.nav button').forEach(b=>b.classList.toggle('on',b.dataset.t===id));medeNav();scrollTo(0,0)}
+ document.querySelectorAll('.nav button').forEach(b=>b.classList.toggle('on',b.dataset.t===(id==='t-emp-add'?'t-emp':id)));medeNav();scrollTo(0,0)}
 
 /* ---- escolha de perfil e login ---- */
 let papel='trab';
@@ -1161,7 +1161,7 @@ function salvaFunc(){const v=i=>$(i).value.trim(),cpf=v('ad-cpf').replace(/\D/g,
 
 /* ---- menu personalizável ---- */
 const MENU_NOMES={trab:{'t-home':'Início','t-hol':'Holerite','t-he':'Horas extras','t-comp':'Comparativo','t-sim':'Simuladores','t-alertas':'Avisos'},
- emp:{'t-emp-home':'Início','t-emp-add':'Adicionar funcionário','t-emp-custo':'Custo com funcionários','t-emp':'Folha de pagamento'}};
+ emp:{'t-emp-home':'Início','t-emp-custo':'Custo com funcionários','t-emp':'Folha de pagamento'}};
 const MENU_PERFIL={trab:'t-perfil',emp:'t-emp-perfil'},MENU_NAV={trab:'nav',emp:'nav-emp'};
 let MENU={trab:Object.keys(MENU_NOMES.trab),emp:Object.keys(MENU_NOMES.emp)},INI={trab:'t-home',emp:'t-emp-home'};
 function carregaMenu(){try{const m=JSON.parse(localStorage.getItem('sj-menu')||'null');if(!m)return;
