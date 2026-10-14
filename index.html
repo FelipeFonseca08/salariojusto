@@ -279,7 +279,7 @@ input[type=date],input[type=month]{-webkit-appearance:none;appearance:none}
  .atalho span{width:34px;height:34px}
  .saldo .v{font-size:clamp(28px,8vw,38px)}
  #t-comp[data-v="graf"] .cp-comp,#t-comp[data-v="comp"] .cp-graf{display:none}
- #t-emp[data-v="trab"] .ep:not(.ep-trab),#t-emp[data-v="venc"] .ep:not(.ep-venc),#t-emp[data-v="desc"] .ep:not(.ep-desc){display:none}
+ #t-emp[data-v="trab"] .ep:not(.ep-trab),#t-emp[data-v="venc"] .ep:not(.ep-venc),#t-emp[data-v="desc"] .ep:not(.ep-desc),#t-emp[data-v="dias"] .ep:not(.ep-dias){display:none}
  #t-emp{padding-bottom:calc(var(--navh,64px) + 84px)}
  .emp-bar{position:fixed;left:12px;right:12px;bottom:calc(var(--navh,64px) + 8px);z-index:20;margin:0}
  .meta{display:none}
@@ -395,7 +395,7 @@ input[type=date],input[type=month]{-webkit-appearance:none;appearance:none}
  .saldo{padding:10px 14px}
  .saldo .v{font-size:26px;margin:2px 0}.saldo .d{margin-bottom:8px}
  .bar-l{display:none}
- .avisos .alerta:nth-of-type(n+2){display:none}
+ #t-home .avisos .alerta:nth-of-type(n+2){display:none}
  .tela{padding-top:8px}
  .topo{margin-bottom:8px}
  .card{padding:10px 12px;margin-bottom:8px}
@@ -416,13 +416,13 @@ input[type=date],input[type=month]{-webkit-appearance:none;appearance:none}
 }
 @media (min-width:900px) and (max-height:640px){.hint{display:none}}
 /* computador com janela estreita (900 a 1179px): a folha da empresa usa abas, como no celular */
-@media (min-width:900px) and (max-width:1179px){
+@media (min-width:900px) and (max-width:1279px){
  #t-emp .tabs.mob-only{display:flex!important}
  #t-emp .topo .pill{display:none}
  #t-emp .topo.com-tabs .tabs{flex:1;width:auto}
  #t-emp.ativa{display:block}
  .emp-grid{display:block}
- #t-emp[data-v="trab"] .ep:not(.ep-trab),#t-emp[data-v="venc"] .ep:not(.ep-venc),#t-emp[data-v="desc"] .ep:not(.ep-desc){display:none}
+ #t-emp[data-v="trab"] .ep:not(.ep-trab),#t-emp[data-v="venc"] .ep:not(.ep-venc),#t-emp[data-v="desc"] .ep:not(.ep-desc),#t-emp[data-v="dias"] .ep:not(.ep-dias){display:none}
  #t-emp{max-width:760px}
 }
 @media (min-width:900px) and (max-height:780px){
@@ -453,10 +453,8 @@ input[type=date],input[type=month]{-webkit-appearance:none;appearance:none}
  #t-emp .campo{margin-bottom:8px}
  #t-emp .campo input,#t-emp select{padding:9px 10px}
  #t-emp .func-bar .btn{padding:10px 14px}
- #t-emp-home .avisos .alerta:nth-of-type(n+3){display:none}
 }
 @media (max-width:899px) and (max-height:640px){
- #t-emp-home .avisos .alerta:nth-of-type(n+2),#t-emp-home .avisos h3{display:none}
  #t-emp .ep .aviso{display:none}
  #t-emp-add .card{padding:10px 12px}
  .cc .aviso{display:none}
@@ -477,7 +475,8 @@ input[type=date],input[type=month]{-webkit-appearance:none;appearance:none}
  #t-emp-home.ativa{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,1fr);column-gap:24px;align-items:start;align-content:start}
  #t-emp-home>.ola{grid-column:1/-1}
  #t-emp-home>.saldo,#t-emp-home>.atalhos{grid-column:1}
- #t-emp-home>.avisos{grid-column:2;grid-row:2/4}
+ #t-emp-home.ativa{grid-template-rows:auto auto auto 1fr}
+ #t-emp-home>.avisos{grid-column:2;grid-row:2/5}
  #t-emp-add{max-width:640px}
  #t-emp-custo{max-width:1000px}
  .custo-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:24px;align-items:start}
@@ -491,6 +490,51 @@ input[type=date],input[type=month]{-webkit-appearance:none;appearance:none}
  #t-emp .topo{margin-bottom:8px}
  #t-emp .ep .aviso{display:none}
  .atalho{padding:12px}
+}
+/* início da empresa: 3 atalhos e lista de funcionários completa, uma embaixo da outra */
+#t-emp-home .atalhos{grid-template-columns:repeat(3,minmax(0,1fr))}
+#t-emp-home .avisos .alerta{margin-bottom:8px;display:block}
+#eh-lista{overflow-y:auto;overscroll-behavior:contain;min-height:70px;padding-right:2px}
+@media (max-width:899px) and (max-height:830px){#t-hol .card h3,#t-perfil .card h3,#t-emp-perfil .card h3{display:none}}
+#h-fgts{margin-top:8px;border-top:1px dashed var(--line)}
+#h-fgts .lin{border-bottom:0}
+@media (max-width:899px) and (max-height:600px){#h-fgts{margin-top:2px}#h-fgts .lin em{display:none}#h-fgts .lin{padding:3px 0}}
+#t-emp .tabs{gap:2px}
+#t-emp .tab{padding:10px 2px;font-size:clamp(10.5px,3.1vw,14px);min-width:0;white-space:nowrap}
+@media (min-width:900px) and (max-height:640px){.emp-bar{padding:9px 20px}.emp-bar .btn-claro{padding:10px 18px}}
+@media (min-width:900px) and (max-height:900px){
+ #t-emp .ep h3{display:none}
+ #t-emp .campo{margin-bottom:8px}
+ #t-emp .campo input,#t-emp select{padding:8px 10px}
+ #t-emp .func-bar .campo span{display:none}
+ #t-emp .topo{margin-bottom:8px}
+ #t-emp .ep .aviso{display:none}
+}
+/* dias de horas extras */
+.dx-f{display:grid;grid-template-columns:1fr 1fr;gap:0 10px;align-items:end}
+.dx-f .btn{grid-column:1/-1;margin:0}
+.dx-l{margin-top:8px;overflow-y:auto;overscroll-behavior:contain;min-height:40px}
+.dx-l .lin{padding:8px 0}
+.dx-l .x{width:32px;height:32px;border-radius:9px;border:0;background:var(--brand-soft);color:var(--neg);display:grid;place-items:center;cursor:pointer}
+.dx-l .x svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round}
+#e-l button.lin{cursor:pointer}
+@media (min-width:1280px){
+ #t-emp.ativa{grid-auto-flow:row dense}
+ .ep-trab{grid-column:1;grid-row:span 2}.ep-venc{grid-column:2}.ep-dias{grid-column:2}.ep-desc{grid-column:3;grid-row:span 2}
+ .dx-f{grid-template-columns:1.7fr 1fr .65fr}.dx-f input[type=date]{font-size:13px}.dx-f .campo input,.dx-f .campo select{padding-left:8px;padding-right:4px}
+}
+@media (min-width:1500px){#t-emp{max-width:1600px}#t-emp.ativa{grid-template-columns:repeat(4,minmax(0,1fr))}.ep-trab,.ep-desc{grid-row:auto}.ep-dias{grid-column:4}}
+/* FGTS informativo, botão de excluir */
+.lin.info .num{color:var(--muted);font-weight:600}
+.lin.info em{color:var(--muted)}
+.func-bar .perigo{display:inline-flex;align-items:center;gap:6px;color:var(--neg);border-color:var(--neg)}
+.func-bar .perigo svg{width:18px;height:18px;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.func-bar .perigo.conf{background:var(--neg);color:#fff}
+@media (max-width:420px){.func-bar .perigo span{display:none}.func-bar .perigo.conf span{display:inline}}
+@media (max-width:899px) and (min-height:701px) and (max-height:900px){
+ #t-hol .card{padding:10px 16px;margin-bottom:8px}
+ #t-hol .lin{padding:7px 0}
+ #t-hol .card h3{display:none}
 }
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 </style>
@@ -547,6 +591,8 @@ input[type=date],input[type=month]{-webkit-appearance:none;appearance:none}
   <div class="btns">
    <button class="icon-btn" aria-label="Notificações" onclick="ir('t-alertas')"><svg viewBox="0 0 24 24"><path d="M6 8a6 6 0 1112 0c0 7 3 7 3 9H3c0-2 3-2 3-9zM10 21h4"/></svg><span class="dot">2</span></button>
    <button class="icon-btn" aria-label="Alternar tema" onclick="tema()"><svg viewBox="0 0 24 24"><path d="M21 13A9 9 0 1111 3a7 7 0 0010 10z"/></svg></button>
+  
+   <button class="icon-btn" aria-label="Perfil" onclick="ir('t-perfil')"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/></svg></button>
   </div>
  </div>
  <button class="card saldo" onclick="ir('t-hol')">
@@ -575,7 +621,8 @@ input[type=date],input[type=month]{-webkit-appearance:none;appearance:none}
  <p class="sub-hol" id="hol-sub"></p>
  <div class="card"><h3>Vencimentos</h3><div id="h-venc"></div></div>
  <div class="card"><h3>Descontos</h3><div id="h-desc"></div>
-  <div class="tot"><span>Líquido a receber</span><span class="num" id="h-liq2"></span></div></div>
+  <div class="tot"><span>Líquido a receber</span><span class="num" id="h-liq2"></span></div>
+  <div id="h-fgts" class="fgts-b"></div></div>
  <p class="aviso">Toque num item para ver o cálculo. Valores estimados (tabelas de INSS e IRRF de 2024).</p>
 </section>
 
@@ -673,7 +720,7 @@ input[type=date],input[type=month]{-webkit-appearance:none;appearance:none}
 <section class="tela" id="t-emp-home">
  <div class="ola">
   <div class="ola-l"><span class="logo-ico" aria-hidden="true"></span><div><small>Área da empresa</small><h1 id="eh-nome">Tech SA</h1></div></div>
-  <div class="btns"><button class="icon-btn" aria-label="Alternar tema" onclick="tema()"><svg viewBox="0 0 24 24"><path d="M21 13A9 9 0 1111 3a7 7 0 0010 10z"/></svg></button></div>
+  <div class="btns"><button class="icon-btn" aria-label="Alternar tema" onclick="tema()"><svg viewBox="0 0 24 24"><path d="M21 13A9 9 0 1111 3a7 7 0 0010 10z"/></svg></button><button class="icon-btn" aria-label="Perfil" onclick="ir('t-emp-perfil')"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/></svg></button></div>
  </div>
  <button class="card saldo" onclick="ir('t-emp-custo')">
   <small id="eh-rot">Custo mensal com funcionários</small>
@@ -686,8 +733,7 @@ input[type=date],input[type=month]{-webkit-appearance:none;appearance:none}
   <button class="atalho" onclick="ir('t-emp-add')"><span><svg viewBox="0 0 24 24"><circle cx="10" cy="8" r="4"/><path d="M2 21c0-4 3.5-6 8-6M18 9v6M15 12h6"/></svg></span><b class="lg">Adicionar funcionário</b><b class="sm">Adicionar</b></button>
   <button class="atalho" onclick="ir('t-emp')"><span><svg viewBox="0 0 24 24"><path d="M6 3h9l4 4v14H6zM14 3v5h5M9 13h7M9 17h7"/></svg></span><b class="lg">Folha de pagamento</b><b class="sm">Folha</b></button>
   <button class="atalho" onclick="ir('t-emp-custo')"><span><svg viewBox="0 0 24 24"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg></span><b class="lg">Custo com funcionários</b><b class="sm">Custos</b></button>
-  <button class="atalho" onclick="ir('t-emp-perfil')"><span><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/></svg></span>Perfil</button>
- </div>
+   </div>
  <div class="avisos"><h3>Funcionários</h3><div id="eh-lista"></div></div>
 </section>
 
@@ -717,8 +763,8 @@ input[type=date],input[type=month]{-webkit-appearance:none;appearance:none}
 <!-- Área da empresa: dados da folha -->
 <section class="tela" id="t-emp" data-v="trab" oninput="pintaEmp()" onchange="pintaEmp()">
  <div class="topo com-tabs"><h2>Folha de pagamento</h2><span class="pill">Área da empresa</span>
-  <div class="tabs mob-only" role="tablist"><button class="tab on" onclick="vista('t-emp','trab',this)">Trabalhador</button><button class="tab" onclick="vista('t-emp','venc',this)">Vencimentos</button><button class="tab" onclick="vista('t-emp','desc',this)">Descontos</button></div></div>
- <div class="func-bar"><label class="campo"><span>Funcionário</span><select id="em-func" onchange="selFunc(this.value)" aria-label="Escolher funcionário"></select></label><button class="btn sec" type="button" onclick="ir('t-emp-add')">+ Novo</button></div>
+  <div class="tabs mob-only" role="tablist"><button class="tab on" onclick="vista('t-emp','trab',this)">Trabalhador</button><button class="tab" onclick="vista('t-emp','venc',this)">Vencimentos</button><button class="tab" onclick="vista('t-emp','desc',this)">Descontos</button><button class="tab" onclick="vista('t-emp','dias',this)">Extras</button></div></div>
+ <div class="func-bar"><label class="campo"><span>Funcionário</span><select id="em-func" onchange="selFunc(this.value)" aria-label="Escolher funcionário"></select></label><button class="btn sec" type="button" onclick="ir('t-emp-add')">+ Novo</button><button class="btn sec perigo" id="em-del" type="button" onclick="excluiFunc()" aria-label="Excluir funcionário"><svg viewBox="0 0 24 24"><path d="M4 7h16M10 11v6M14 11v6M6 7l1 13h10l1-13M9 7V4h6v3"/></svg><span>Excluir</span></button></div>
  <p class="hint">Escolha o funcionário e lance os valores. Ao salvar, o holerite, as horas extras e o comparativo dele passam a mostrar estes dados.</p>
  <div class="emp-grid">
   <div class="card ep ep-trab"><h3>Trabalhador</h3>
@@ -739,6 +785,16 @@ input[type=date],input[type=month]{-webkit-appearance:none;appearance:none}
    <label class="lin sw"><span>IRRF automático<em>Sobre o bruto menos o INSS</em></span><input type="checkbox" id="em-irrf-auto" checked></label>
    <label class="campo"><span>IRRF (R$)</span><input id="em-irrf" type="number" step="0.01" min="0" inputmode="decimal"></label>
   </div>
+  <div class="card ep ep-dias"><h3>Dias de horas extras</h3>
+   <div class="dx-f">
+    <label class="campo"><span>Dia</span><input id="dx-data" type="date"></label>
+    <label class="campo"><span>Adicional</span><select id="dx-tipo"><option value="50">50%</option><option value="100">100%</option></select></label>
+    <label class="campo"><span>Horas</span><input id="dx-h" type="number" step="0.5" min="0.5" max="12" value="1" inputmode="decimal"></label>
+    <button class="btn" type="button" onclick="adicionaDia()">+ Adicionar</button>
+   </div>
+   <p class="erro" id="dx-erro" role="alert"></p>
+   <div id="dx-lista" class="dx-l"></div>
+  </div>
  </div>
  <div class="emp-bar"><div class="eb-liq"><small>Prévia do líquido do trabalhador</small><div class="v num" id="em-liq"></div><div class="d num" id="em-det"></div></div><button class="btn-claro" onclick="salvaEmp()">Salvar e enviar</button></div>
 </section>
@@ -748,7 +804,7 @@ input[type=date],input[type=month]{-webkit-appearance:none;appearance:none}
  <div class="topo"><h2>Perfil da empresa</h2></div>
  <div class="card perfil-topo"><div class="avatar" id="pe-av">TS</div><div><b id="pe-nome">Tech SA</b><small>Área da empresa</small></div></div>
  <div class="card"><h3>Dados da conta</h3>
-  <div class="lin"><span>CNPJ</span><span class="num" id="pe-cnpj"></span></div>
+  <div class="lin"><span>CNPJ</span><span class="cpf-w"><span class="num" id="pe-cnpj"></span><button class="eye" id="pe-eye" type="button" aria-label="Mostrar CNPJ" aria-pressed="false" onclick="verCnpj()"><svg viewBox="0 0 24 24" id="pe-eye-s"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg></button></span></div>
   <div class="lin"><span>Funcionários cadastrados</span><span id="pe-trab"></span></div>
  </div>
  <div class="card"><h3>Preferências</h3>
@@ -778,6 +834,7 @@ input[type=date],input[type=month]{-webkit-appearance:none;appearance:none}
 
 <nav class="nav" id="nav-emp">
  <button data-t="t-emp-home" onclick="ir('t-emp-home')"><svg viewBox="0 0 24 24"><path d="M3 11l9-8 9 8M5 10v10h14V10"/></svg>Início</button>
+ <button data-t="t-emp-add" onclick="ir('t-emp-add')"><svg viewBox="0 0 24 24"><circle cx="10" cy="8" r="4"/><path d="M2 21c0-4 3.5-6 8-6M18 9v6M15 12h6"/></svg>Adicionar</button>
  <button data-t="t-emp-custo" onclick="ir('t-emp-custo')"><svg viewBox="0 0 24 24"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg><span class="lg">Custo com funcionários</span><span class="sm">Custos</span></button>
  <button data-t="t-emp" onclick="ir('t-emp')"><svg viewBox="0 0 24 24"><path d="M6 3h9l4 4v14H6zM14 3v5h5M9 13h7M9 17h7"/></svg><span class="lg">Folha de pagamento</span><span class="sm">Folha</span></button>
  <button data-t="t-emp-perfil" onclick="ir('t-emp-perfil')"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/></svg>Perfil</button>
@@ -806,7 +863,7 @@ const addMes=(m,n)=>{const i=mesInfo(m),t=i.ano*12+i.mes-1+n;return `${Math.floo
 const iniciais=n=>{const p=(n||'').trim().split(/\s+/).filter(Boolean);return(((p[0]||'?')[0])+(p.length>1?p[p.length-1][0]:'')).toUpperCase()};
 
 /* ---- dados lançados pela empresa (ficam salvos neste navegador) ---- */
-const PADRAO={nome:'Maria Silva',cargo:'Desenvolvedora',empresa:'Tech SA',mat:'004821',adm:'2022-03-15',mes:'2024-07',salario:3000,he50:10,he100:2,vtPct:6,inssAuto:true,inssMan:0,irrfAuto:true,irrfMan:0,outros:0};
+const PADRAO={nome:'Maria Silva',cargo:'Desenvolvedora',empresa:'Tech SA',mat:'004821',adm:'2022-03-15',mes:'2024-07',salario:3000,he50:10,he100:2,dias:[{d:'2024-07-02',t:50,h:2},{d:'2024-07-04',t:50,h:3},{d:'2024-07-09',t:50,h:2},{d:'2024-07-16',t:50,h:2},{d:'2024-07-23',t:50,h:1},{d:'2024-07-07',t:100,h:2}],vtPct:6,inssAuto:true,inssMan:0,irrfAuto:true,irrfMan:0,outros:0};
 const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 /* FUNC = funcionários cadastrados pela empresa; DADOS/HIST = os do funcionário que está sendo visto na área do trabalhador */
 let FUNC=[],DADOS={...PADRAO},HIST={},VISTO=null,SEL=null;
@@ -836,7 +893,12 @@ function compute(d){
  return{hora,v50,v100,he,dsr,bruto,inss,inssAut,base,ir,irrf,vt,outros,desc,liq:bruto-desc,salario:d.salario,horas:d.he50+d.he100}}
 
 /* ---- visão do trabalhador ---- */
-function linha(i,c){const[n,v,d,k]=i;const b=document.createElement('button');b.className='lin';b.innerHTML=`<span>${n}<em>Ver cálculo</em></span><span class="num ${c}">${c==='n'?'− ':''}${R(v)}</span>`;b.onclick=()=>abrir(n,d,k);return b}
+function linha(i,c){const[n,v,d,k,inf]=i;const b=document.createElement('button');b.className='lin'+(inf?' info':'');b.innerHTML=`<span>${n}<em>${inf?'Pago pela empresa · não desconta':'Ver cálculo'}</em></span><span class="num ${inf?'':c}">${c==='n'&&!inf?'− ':''}${R(v)}</span>`;b.onclick=()=>abrir(n,d,k);return b}
+function diasTxt(d,t,c){const L=diasMes(d,t),h=t===50?d.he50:d.he100;
+ if(!L.length)return h>0?`A empresa ainda não informou os dias deste mês.\nTotal lançado: ${fmtH(h)} h`:'Nenhuma hora extra com este adicional neste mês.';
+ const m=t===50?1.5:2,soma=L.reduce((a,x)=>a+x.h,0);
+ let r=L.map(x=>`${dFmt(x.d)} · ${fmtH(x.h)} h · ${R(x.h*c.hora*m)}`).join('\n')+`\n\nTotal dos dias: ${fmtH(soma)} h · ${R(soma*c.hora*m)}`;
+ if(Math.abs(soma-h)>.001)r+=`\nTotal lançado pela empresa: ${fmtH(h)} h`;return r}
 function renderTrab(){
  const d=DADOS,c=compute(d),mi=mesInfo(d.mes),pg=`05/${pad(mesInfo(addMes(d.mes,1)).mes)}`;
  $('u-nome').textContent=d.nome;
@@ -845,22 +907,23 @@ function renderTrab(){
  $('hol-sub').textContent=`${d.empresa} · ${d.cargo||'—'} · pagamento em ${pg}`;
  const venc=[['Salário base',d.salario,'Valor fixo mensal definido em contrato.',`${R(d.salario)} (30 dias)`]];
  if(c.he>0){
-  venc.push(['Horas extras',c.he,'Horas além da jornada, com adicional de 50% (dias úteis) ou 100% (domingos e feriados).',`Valor da hora: ${R(d.salario)} ÷ 220 = ${R(c.hora)}\n${fmtH(d.he50)} h com 50% = ${R(c.v50)}\n${fmtH(d.he100)} h com 100% = ${R(c.v100)}`]);
+  venc.push(['Horas extras',c.he,'Horas além da jornada, com adicional de 50% (dias úteis) ou 100% (domingos e feriados).',`Valor da hora: ${R(d.salario)} ÷ 220 = ${R(c.hora)}\n${fmtH(d.he50)} h com 50% = ${R(c.v50)}\n${fmtH(d.he100)} h com 100% = ${R(c.v100)}`+(diasMes(d,50).length||diasMes(d,100).length?'\n\nDias com 50%:\n'+(diasMes(d,50).map(x=>dFmt(x.d)+' · '+fmtH(x.h)+' h').join('\n')||'—')+'\nDias com 100%:\n'+(diasMes(d,100).map(x=>dFmt(x.d)+' · '+fmtH(x.h)+' h').join('\n')||'—'):'')]);
   venc.push(['DSR sobre extras',c.dsr,'Descanso semanal remunerado: reflexo das horas extras nos domingos e feriados.',`${R(c.he)} ÷ 26 dias úteis × 4 descansos = ${R(c.dsr)}`])}
  const desc=[
   ['INSS',c.inss,'Contribuição previdenciária. Na tabela progressiva, cada faixa do salário tem seu percentual.',d.inssAuto?`Bruto ${R(c.bruto)}\nAlíquotas de 7,5% a 14% por faixa = ${R(c.inss)}`:`Valor informado pela empresa: ${R(c.inss)}`],
   ['IRRF',c.irrf,'Imposto de renda retido na fonte, calculado sobre o bruto menos o INSS.',d.irrfAuto?(c.ir.a==='isento'?`Base: ${R(c.base)}\nFaixa isenta de IRRF`:`Base: ${R(c.base)}\n${c.ir.a} − dedução de ${R(c.ir.d)} = ${R(c.irrf)}`):`Valor informado pela empresa: ${R(c.irrf)}`],
   ['Vale-transporte',c.vt,'Desconto de até 6% do salário base.',`${R(d.salario)} × ${String(d.vtPct).replace('.',',')}% = ${R(c.vt)}`]];
  if(c.outros>0)desc.push(['Outros descontos',c.outros,'Descontos adicionais lançados pela empresa.',`Valor informado pela empresa: ${R(c.outros)}`]);
- $('h-venc').innerHTML='';$('h-desc').innerHTML='';
- venc.forEach(i=>$('h-venc').append(linha(i,'p')));desc.forEach(i=>$('h-desc').append(linha(i,'n')));
+ const fgts=['FGTS do mês (8%)',c.bruto*.08,'O FGTS é um depósito que a empresa faz em uma conta no seu nome, além do seu salário. Ele não é descontado do que você recebe, por isso não entra no cálculo do líquido.',`${R(c.bruto)} × 8% = ${R(c.bruto*.08)}\nDepositado pela empresa na sua conta do FGTS (Caixa).\nNão reduz o seu líquido.`,1];
+ $('h-venc').innerHTML='';$('h-desc').innerHTML='';$('h-fgts').innerHTML='';
+ venc.forEach(i=>$('h-venc').append(linha(i,'p')));desc.forEach(i=>$('h-desc').append(linha(i,'n')));$('h-fgts').append(linha(fgts,''));
  $('h-liq').textContent=$('h-liq2').textContent=R(c.liq);
  $('h-det').textContent=`Bruto ${R(c.bruto)} · Descontos ${R(c.desc)}`;
  const pc=c.bruto>0?c.liq/c.bruto*100:0;
  $('h-bar').style.width=Math.max(0,Math.min(100,pc))+'%';$('h-pct').textContent=pc.toFixed(0)+'% do bruto';
  $('e-h').textContent=fmtH(c.horas)+' horas';$('e-v').textContent='Valor bruto: '+R(c.he);
  $('e-l').innerHTML='';
- [['Adicional de 50%',d.he50,c.v50],['Adicional de 100%',d.he100,c.v100]].forEach(([n,h,v])=>{const e=document.createElement('div');e.className='lin';e.innerHTML=`<span>${n}<em>${fmtH(h)} h</em></span><span class="num p">${R(v)}</span>`;$('e-l').append(e)});
+ [['Adicional de 50%',50,d.he50,c.v50],['Adicional de 100%',100,d.he100,c.v100]].forEach(([n,t,h,v])=>{const e=document.createElement('button');e.className='lin';e.innerHTML=`<span>${n}<em>${fmtH(h)} h · ver os dias</em></span><span class="num p">${R(v)}</span>`;e.onclick=()=>abrir(`Horas extras de ${t}%`,`Dias em que você fez hora extra com adicional de ${t}%.`,diasTxt(d,t,c));$('e-l').append(e)});
  const e=document.createElement('div');e.className='lin';e.innerHTML=`<span>DSR sobre as extras<em>Reflexo no descanso semanal</em></span><span class="num p">${R(c.dsr)}</span>`;$('e-l').append(e);
  document.querySelectorAll('.a-pag').forEach(x=>x.textContent=pg);
  document.querySelectorAll('.a-hrs').forEach(x=>x.textContent=fmtH(c.horas));
@@ -877,7 +940,7 @@ const TELAS_EMP=['t-emp-home','t-emp-add','t-emp-custo','t-emp','t-emp-perfil'];
 function ir(id){const at=document.querySelector('.tela.ativa'),ant=at?at.id:id;
  document.querySelectorAll('.tela').forEach(t=>t.classList.remove('ativa','volta'));
  const n=$(id);n.classList.toggle('volta',id==='t-home'&&ant!=='t-login'&&ant!=='t-home');n.classList.add('ativa');
- if(id==='t-perfil')cpfVer=false;
+ if(id==='t-perfil')cpfVer=false;if(id==='t-emp-perfil')cnpjVer=false;
  if(id==='t-perfil'||id==='t-emp-perfil')pintaPerfil();
  if(id==='t-emp-home')pintaEmpHome();
  if(id==='t-emp-custo')pintaCusto();
@@ -926,13 +989,16 @@ try{const s=localStorage.getItem('sj-tema');if(s)document.documentElement.datase
 /* ---- simuladores ---- */
 function aba(k,b){b.parentElement.querySelectorAll('.tab').forEach(t=>t.classList.remove('on'));b.classList.add('on');
  ['resc','fer','rea'].forEach(x=>$('a-'+x).style.display=x===k?'block':'none');$('res').innerHTML=VAZIO}
-function mostra(t,itens,total,lt){
- const html=`<h3>${t}</h3>`+itens.map(i=>`<div class="lin"><span>${i[0]}</span><span class="num">${R(i[1])}</span></div>`).join('')+`<div class="tot"><span>${lt}</span><span class="num">${R(total)}</span></div>`;
+function mostra(t,itens,total,lt,extra){
+ const ex=(extra||[]).map(i=>`<div class="lin info"><span>${i[0]}<em>${i[2]}</em></span><span class="num">${R(i[1])}</span></div>`).join('');
+ const html=`<h3>${t}</h3>`+itens.map(i=>`<div class="lin"><span>${i[0]}</span><span class="num">${R(i[1])}</span></div>`).join('')+`<div class="tot"><span>${lt}</span><span class="num">${R(total)}</span></div>`+ex;
  if(matchMedia('(min-width:900px)').matches)$('res').innerHTML=html;
  else{$('m-res').innerHTML=html;$('modal-res').classList.add('on')}}
 function fecharRes(){$('modal-res').classList.remove('on')}
-function vista(id,v,b){$(id).dataset.v=v;b.parentElement.querySelectorAll('.tab').forEach(t=>t.classList.remove('on'));b.classList.add('on');scrollTo(0,0)}
-function medeNav(){const n=document.querySelector('.nav.on');let h=0;if(n&&getComputedStyle(n).position==='fixed'&&n.offsetWidth>=innerWidth*.9)h=n.offsetHeight;document.documentElement.style.setProperty('--navh',h+'px')}
+function vista(id,v,b){$(id).dataset.v=v;setTimeout(ajustaDias,0);b.parentElement.querySelectorAll('.tab').forEach(t=>t.classList.remove('on'));b.classList.add('on');scrollTo(0,0)}
+function medeNav(){const n=document.querySelector('.nav.on');let h=0;if(n&&getComputedStyle(n).position==='fixed'&&n.offsetWidth>=innerWidth*.9)h=n.offsetHeight;document.documentElement.style.setProperty('--navh',h+'px');ajustaLista()}
+function ajustaDias(){const l=$('dx-lista'),t=document.getElementById('t-emp');if(!l||!t.classList.contains('ativa'))return;l.style.maxHeight='';const bar=t.querySelector('.emp-bar'),fx=getComputedStyle(bar).position==='fixed',pb=parseFloat(getComputedStyle(t).paddingBottom)||0;l.style.maxHeight=Math.max(40,innerHeight-l.getBoundingClientRect().top-pb-(fx?0:bar.offsetHeight+20)-52)+'px'}
+function ajustaLista(){ajustaDias();const l=$('eh-lista'),t=document.getElementById('t-emp-home');if(!l||!t.classList.contains('ativa'))return;l.style.maxHeight='';const pb=parseFloat(getComputedStyle(t).paddingBottom)||0,top=l.getBoundingClientRect().top+scrollY;l.style.maxHeight=Math.max(70,innerHeight-top-pb-4)+'px'}
 addEventListener('resize',medeNav);
 function calcResc(){const s=+$('r-sal').value,a=new Date($('r-adm').value),f=new Date($('r-sai').value),tp=document.querySelector('[name=tp]:checked').value;
  if(!s||isNaN(a)||isNaN(f)||f<a){toast('Confira as datas e o salário');return}
@@ -945,14 +1011,15 @@ function calcResc(){const s=+$('r-sal').value,a=new Date($('r-adm').value),f=new
  const it=[['Saldo de salário',saldo],['13º proporcional',dec],['Férias proporcionais + 1/3',fer+terco]];
  if(aviso)it.push(['Aviso prévio indenizado',aviso]);
  if(multa)it.push([`Multa do FGTS (${tp==='sem'?'40':'20'}%)`,multa]);
- mostra('Resultado estimado',it,it.reduce((x,i)=>x+i[1],0),'Total estimado')}
+ const fx=tp==='sem'?['Saldo do FGTS para sacar',fgts,'Depositado pela empresa · não entra no total']:tp==='aco'?['Saldo do FGTS para sacar (80%)',fgts*.8,'Depositado pela empresa · não entra no total']:['Saldo do FGTS (fica bloqueado)',fgts,'Depositado pela empresa · não entra no total'];
+ mostra('Resultado estimado',it,it.reduce((x,i)=>x+i[1],0),'Total estimado',[fx])}
 function calcFer(){const s=+$('f-sal').value,d=Math.min(30,Math.max(5,+$('f-dias').value||30)),ab=$('f-abono').checked;
  if(!s){toast('Informe o salário');return}
  const base=s/30*d,terco=base/3,it=[[`Férias (${d} dias)`,base],['Adicional de 1/3',terco]];
  if(ab){it.push(['Abono (10 dias + 1/3)',s/30*10*4/3])}
- mostra('Resultado estimado',it,it.reduce((x,i)=>x+i[1],0),'Total bruto')}
+ mostra('Resultado estimado',it,it.reduce((x,i)=>x+i[1],0),'Total bruto',[['FGTS sobre as férias (8%)',(base+terco+(ab?s/30*10*4/3:0))*.08,'Depositado pela empresa · não desconta']])}
 function calcRea(){const s=+$('a-sal').value,p=+$('a-pct').value;if(!s){toast('Informe o salário');return}
- const n=s*(1+p/100);mostra('Resultado',[['Salário atual',s],['Aumento',n-s]],n,'Novo salário')}
+ const n=s*(1+p/100);mostra('Resultado',[['Salário atual',s],['Aumento',n-s]],n,'Novo salário',[['FGTS mensal (8%)',n*.08,'Depositado pela empresa · não desconta']])}
 
 /* ---- comparativo (usa os meses enviados pela empresa; os demais são exemplo) ---- */
 let MESES=[];
@@ -984,13 +1051,31 @@ function lerEmp(){const v=i=>$(i).value;return{
  vtPct:Math.min(100,Math.max(0,num(v('em-vt')))),
  inssAuto:$('em-inss-auto').checked,inssMan:Math.max(0,num(v('em-inss'))),
  irrfAuto:$('em-irrf-auto').checked,irrfMan:Math.max(0,num(v('em-irrf'))),
- outros:Math.max(0,num(v('em-outros')))}}
-function fillEmp(){pintaFuncSel();const d=funcSel().dados,s=(i,x)=>$(i).value=x;
+ outros:Math.max(0,num(v('em-outros'))),dias:DIAS.map(x=>({...x}))}}
+function fillEmp(){pintaFuncSel();const d=funcSel().dados,s=(i,x)=>$(i).value=x;DIAS=(d.dias||[]).map(x=>({...x}));
  s('em-nome',d.nome);s('em-cargo',d.cargo);s('em-emp',d.empresa);s('em-mat',d.mat);s('em-adm',d.adm);s('em-mes',d.mes);
  s('em-sal',d.salario);s('em-h50',d.he50);s('em-h100',d.he100);s('em-vt',d.vtPct);
  $('em-inss-auto').checked=d.inssAuto;s('em-inss',d.inssMan||'');
  $('em-irrf-auto').checked=d.irrfAuto;s('em-irrf',d.irrfMan||'');
- s('em-outros',d.outros||'');pintaEmp()}
+ s('em-outros',d.outros||'');pintaDias();pintaEmp()}
+/* ---- dias de horas extras ---- */
+let DIAS=[];
+const dFmt=iso=>{const[y,m,d]=iso.split('-').map(Number);return new Date(y,m-1,d).toLocaleDateString('pt-BR',{weekday:'short'}).replace('.','')+' '+pad(d)+'/'+pad(m)};
+const diasMes=(d,t)=>(d.dias||[]).filter(x=>x.t===t&&String(x.d).startsWith(d.mes)).sort((a,b)=>a.d<b.d?-1:1);
+function pintaDias(){const mes=$('em-mes').value||funcSel().dados.mes;
+ if(/^\d{4}-\d{2}$/.test(mes)){const[y,m]=mes.split('-').map(Number);$('dx-data').min=mes+'-01';$('dx-data').max=mes+'-'+pad(new Date(y,m,0).getDate())}
+ const L=DIAS.filter(x=>String(x.d).startsWith(mes)).sort((a,b)=>a.d<b.d?-1:1);
+ $('dx-lista').innerHTML=L.length?L.map(x=>`<div class="lin"><span>${dFmt(x.d)}<em>${x.t}% · ${fmtH(x.h)} h</em></span><button class="x" type="button" aria-label="Remover ${dFmt(x.d)}" onclick="removeDia('${x.d}',${x.t})"><svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg></button></div>`).join(''):'<p class="aviso" style="margin:6px 0 0">Nenhum dia lançado neste mês.</p>';ajustaDias()}
+function somaDias(){const mes=$('em-mes').value||funcSel().dados.mes,t=k=>DIAS.filter(x=>x.t===k&&String(x.d).startsWith(mes)).reduce((a,x)=>a+x.h,0);
+ $('em-h50').value=t(50);$('em-h100').value=t(100);pintaDias();pintaEmp()}
+function adicionaDia(){const e=$('dx-erro'),erro=m=>{e.textContent=m},mes=$('em-mes').value||funcSel().dados.mes,dia=$('dx-data').value,t=+$('dx-tipo').value,h=num($('dx-h').value);
+ if(!dia){erro('Escolha o dia.');$('dx-data').focus();return}
+ if(!dia.startsWith(mes)){erro('O dia precisa estar no mês de referência.');return}
+ if(!(h>0&&h<=12)){erro('Informe de 0,5 a 12 horas.');$('dx-h').focus();return}
+ const ja=DIAS.find(x=>x.d===dia&&x.t===t);if(ja)ja.h=Math.min(12,ja.h+h);else DIAS.push({d:dia,t,h});
+ erro('');$('dx-data').value='';$('dx-h').value=1;somaDias();toast('Dia lançado. Salve para enviar.')}
+function removeDia(d,t){DIAS=DIAS.filter(x=>!(x.d===d&&x.t===t));somaDias()}
+$('em-mes').addEventListener('change',pintaDias);
 function pintaEmp(){const d=lerEmp(),c=compute(d);
  $('em-inss').disabled=d.inssAuto;$('em-irrf').disabled=d.irrfAuto;
  if(d.inssAuto)$('em-inss').value=c.inssAut.toFixed(2);
@@ -1008,14 +1093,23 @@ function restauraEmp(){FUNC=[{id:'f1',cpf:'',dados:{...PADRAO},hist:{}}];SEL='f1
 const funcSel=()=>FUNC.find(f=>f.id===SEL)||FUNC[0];
 function pintaFuncSel(){const e=$('em-func');if(!e)return;
  e.innerHTML=FUNC.map(f=>`<option value="${esc(f.id)}">${esc(f.dados.nome||'Sem nome')}${f.dados.cargo?' · '+esc(f.dados.cargo):''}</option>`).join('');e.value=funcSel().id}
-function selFunc(id){SEL=id;fillEmp()}
+function selFunc(id){delReset();SEL=id;fillEmp()}
+let delT=0;
+function delReset(){clearTimeout(delT);const b=$('em-del');b.classList.remove('conf');b.querySelector('span').textContent='Excluir'}
+function excluiFunc(){const b=$('em-del');
+ if(FUNC.length<2){toast('A empresa precisa ter ao menos um funcionário');return}
+ if(!b.classList.contains('conf')){b.classList.add('conf');b.querySelector('span').textContent='Confirmar';clearTimeout(delT);delT=setTimeout(delReset,4000);return}
+ delReset();const f=funcSel(),nome=(f.dados.nome||'Funcionário').split(' ')[0];
+ FUNC=FUNC.filter(x=>x!==f);SEL=FUNC[0].id;
+ if(VISTO===f||!FUNC.includes(VISTO))usaFunc(FUNC[0]);
+ gravar();fillEmp();renderTrab();montaComp();pintaEmpHome();pintaCusto();pintaPerfil();toast(nome+' foi excluído(a)')}
 function abreFolha(id){SEL=id;fillEmp();ir('t-emp')}
 function custoF(f){const c=compute(f.dados),fgts=c.bruto*.08;return{f,c,fgts,total:c.bruto+fgts}}
 function pintaEmpHome(){const L=FUNC.map(custoF),tot=L.reduce((s,x)=>s+x.total,0),liq=L.reduce((s,x)=>s+x.c.liq,0),n=L.length;
  $('eh-nome').textContent=FUNC[0].dados.empresa;
  $('eh-v').textContent=R(tot);$('eh-d').textContent=`${n} funcionário${n>1?'s':''} · Líquido pago ${R(liq)}`;
  const pc=tot>0?liq/tot*100:0;$('eh-bar').style.width=Math.max(0,Math.min(100,pc))+'%';$('eh-pct').textContent=pc.toFixed(0)+'% do custo';
- $('eh-lista').innerHTML=L.slice(0,4).map(x=>`<button class="alerta func-i" onclick="abreFolha('${esc(x.f.id)}')"><div><b>${esc(x.f.dados.nome||'Sem nome')}</b>${esc(x.f.dados.cargo||'—')} · custo ${R(x.total)}</div></button>`).join('')}
+ $('eh-lista').innerHTML=L.map(x=>`<button class="alerta func-i" onclick="abreFolha('${esc(x.f.id)}')"><div><b>${esc(x.f.dados.nome||'Sem nome')}</b>${esc(x.f.dados.cargo||'—')} · custo ${R(x.total)}</div></button>`).join('')}
 function pintaCusto(){const L=FUNC.map(custoF),sm=k=>L.reduce((s,x)=>s+k(x),0),tot=sm(x=>x.total);
  const row=(n,v,t)=>`<div class="${t?'tot':'lin'}"><span>${n}</span><span class="num">${R(v)}</span></div>`;
  $('cu-res').innerHTML=row('Salários, extras e DSR (bruto)',sm(x=>x.c.bruto))+row('FGTS (8%)',sm(x=>x.fgts))+row('Custo total',tot,1)+row('Líquido pago aos funcionários',sm(x=>x.c.liq))+row('Descontos retidos (INSS, IRRF…)',sm(x=>x.c.desc));
@@ -1037,14 +1131,19 @@ function pintaCpf(){const c=window.cpfUsr||'',b=$('p-eye');
  $('p-cpf').textContent=cpfVer?(c||'—'):'•••.•••.•••-••';
  $('p-eye-s').innerHTML=cpfVer?OLHO_X:OLHO;b.setAttribute('aria-label',cpfVer?'Ocultar CPF':'Mostrar CPF');b.setAttribute('aria-pressed',cpfVer?'true':'false')}
 function verCpf(){cpfVer=!cpfVer;pintaCpf()}
+let cnpjVer=false;
+function pintaCnpj(){const j=window.cnpjUsr||'',b=$('pe-eye');
+ $('pe-cnpj').textContent=cnpjVer?(j||'—'):'••.•••.•••/••••-••';
+ $('pe-eye-s').innerHTML=cnpjVer?OLHO_X:OLHO;b.setAttribute('aria-label',cnpjVer?'Ocultar CNPJ':'Mostrar CNPJ');b.setAttribute('aria-pressed',cnpjVer?'true':'false')}
+function verCnpj(){cnpjVer=!cnpjVer;pintaCnpj()}
 function pintaPerfil(){const d=DADOS;
  const dark=(document.documentElement.dataset.theme||(matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light'))==='dark';
  $('p-tema').checked=dark;$('pe-tema').checked=dark;
  pintaCpf();
- const j=window.cnpjUsr||'';$('pe-cnpj').textContent=j.length===18?`••.•••.•••/${j.slice(11,15)}-••`:'••.•••.•••/••••-••';
+ pintaCnpj();
  const emp=FUNC[0].dados.empresa;$('pe-nome').textContent=emp;$('pe-av').textContent=iniciais(emp);$('pe-trab').textContent=FUNC.length}
 function salvaNot(){try{localStorage.setItem('sj-not',$('p-not').checked?'1':'0')}catch(e){}toast($('p-not').checked?'Avisos ativados':'Avisos desativados')}
-function sair(){cpfVer=false;$('senha').value='';window.cpfUsr='';window.cnpjUsr='';ir('t-papel')}
+function sair(){cpfVer=false;cnpjVer=false;$('senha').value='';window.cpfUsr='';window.cnpjUsr='';ir('t-papel')}
 try{if(localStorage.getItem('sj-not')==='0')$('p-not').checked=false}catch(e){}
 
 /* ---- tecla Enter ---- */
@@ -1053,6 +1152,7 @@ document.addEventListener('keydown',e=>{
  const t=e.target,tela=t.closest&&t.closest('.tela');if(!tela)return;
  const tag=t.tagName,tp=t.type;
  if(tela.id==='t-login'&&tag==='INPUT'){e.preventDefault();entrar();return}
+ if(tela.id==='t-emp'&&t.closest('.ep-dias')&&(tag==='INPUT'||tag==='SELECT')){e.preventDefault();adicionaDia();return}
  if(tela.id==='t-emp'&&tag==='INPUT'&&tp!=='checkbox'){e.preventDefault();salvaEmp();return}
  if(tela.id==='t-emp-add'&&tag==='INPUT'){e.preventDefault();salvaFunc();return}
  if(tela.id==='t-sim'&&tag==='INPUT'){
