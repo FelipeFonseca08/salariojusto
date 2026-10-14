@@ -279,7 +279,7 @@ input[type=date],input[type=month]{-webkit-appearance:none;appearance:none}
  .atalho span{width:34px;height:34px}
  .saldo .v{font-size:clamp(28px,8vw,38px)}
  #t-comp[data-v="graf"] .cp-comp,#t-comp[data-v="comp"] .cp-graf{display:none}
- #t-emp[data-v="trab"] .ep:not(.ep-trab),#t-emp[data-v="venc"] .ep:not(.ep-venc),#t-emp[data-v="desc"] .ep:not(.ep-desc),#t-emp[data-v="dias"] .ep:not(.ep-dias){display:none}
+ #t-emp[data-v="trab"] .ep:not(.ep-trab),#t-emp[data-v="venc"] .ep:not(.ep-venc),#t-emp[data-v="desc"] .ep:not(.ep-desc){display:none}
  #t-emp{padding-bottom:calc(var(--navh,64px) + 84px)}
  .emp-bar{position:fixed;left:12px;right:12px;bottom:calc(var(--navh,64px) + 8px);z-index:20;margin:0}
  .meta{display:none}
@@ -422,7 +422,7 @@ input[type=date],input[type=month]{-webkit-appearance:none;appearance:none}
  #t-emp .topo.com-tabs .tabs{flex:1;width:auto}
  #t-emp.ativa{display:block}
  .emp-grid{display:block}
- #t-emp[data-v="trab"] .ep:not(.ep-trab),#t-emp[data-v="venc"] .ep:not(.ep-venc),#t-emp[data-v="desc"] .ep:not(.ep-desc),#t-emp[data-v="dias"] .ep:not(.ep-dias){display:none}
+ #t-emp[data-v="trab"] .ep:not(.ep-trab),#t-emp[data-v="venc"] .ep:not(.ep-venc),#t-emp[data-v="desc"] .ep:not(.ep-desc){display:none}
  #t-emp{max-width:760px}
 }
 @media (min-width:900px) and (max-height:780px){
@@ -510,20 +510,44 @@ input[type=date],input[type=month]{-webkit-appearance:none;appearance:none}
  #t-emp .topo{margin-bottom:8px}
  #t-emp .ep .aviso{display:none}
 }
+#dx-erro{min-height:0;margin:4px 0 0}
+#dx-erro:empty{display:none}
+@media (max-width:899px) and (max-height:780px){#t-emp .ep-venc .aviso:not(#dx-tot){display:none}}
+@media (max-width:899px) and (min-height:601px) and (max-height:900px){
+ #t-perfil .card,#t-emp-perfil .card{padding:10px 16px;margin-bottom:8px}
+ #t-perfil .lin,#t-emp-perfil .lin{padding:7px 0}
+ #t-perfil .lin em,#t-emp-perfil .lin em{display:none}
+ #t-perfil .card h3,#t-emp-perfil .card h3{display:none}
+}
+@media (max-width:899px) and (max-height:600px){
+ #t-perfil .lin em,#t-emp-perfil .lin em{display:none}
+ #t-perfil .lin,#t-emp-perfil .lin{padding:3px 0}
+ #t-perfil .card,#t-emp-perfil .card{padding:6px 12px;margin-bottom:6px}
+ #t-perfil .btn,#t-emp-perfil .btn{padding:8px;margin-bottom:6px}
+}
+/* personalizar menu */
+.mn-i{padding:6px 0}
+.mn-s{display:flex;gap:6px;margin-left:12px}
+.mn-b{width:36px;height:36px;border-radius:10px;border:1px solid var(--line);background:var(--bg);color:var(--ink);display:grid;place-items:center;cursor:pointer}
+.mn-b:disabled{opacity:.35;cursor:default}
+.mn-b svg,.mn-lock{width:18px;height:18px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.mn-fixo{opacity:.8}.mn-lock{color:var(--muted);margin-right:8px}
 /* dias de horas extras */
-.dx-f{display:grid;grid-template-columns:1fr 1fr;gap:0 10px;align-items:end}
-.dx-f .btn{grid-column:1/-1;margin:0}
+.dx-t{font-size:13px;font-weight:700;margin:2px 0 4px}
+.dx-f{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,1.1fr) minmax(0,.7fr) 44px;gap:0 8px;align-items:end}
+.dx-f .campo{margin-bottom:0}.dx-f .campo input,.dx-f .campo select{padding-left:8px;padding-right:6px}
+.dx-f input[type=date]{font-size:12px;padding-left:6px!important;padding-right:2px!important}
+.dx-f select{padding-right:2px!important;text-overflow:clip}
+#dx-h{-moz-appearance:textfield;appearance:textfield}#dx-h::-webkit-inner-spin-button,#dx-h::-webkit-outer-spin-button{-webkit-appearance:none;margin:0}
+.dx-add{width:44px;height:44px;border:0;border-radius:12px;background:var(--btn);color:#fff;display:grid;place-items:center;cursor:pointer}
+.dx-add svg{width:20px;height:20px;stroke:currentColor;fill:none;stroke-width:2.2;stroke-linecap:round}
 .dx-l{margin-top:8px;overflow-y:auto;overscroll-behavior:contain;min-height:40px}
-.dx-l .lin{padding:8px 0}
+.dx-l .lin{padding:5px 0}
+.dx-l .lin>span{font-weight:600}
+.dx-l .lin em{display:inline;margin-left:8px;font-weight:400}
 .dx-l .x{width:32px;height:32px;border-radius:9px;border:0;background:var(--brand-soft);color:var(--neg);display:grid;place-items:center;cursor:pointer}
 .dx-l .x svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round}
 #e-l button.lin{cursor:pointer}
-@media (min-width:1280px){
- #t-emp.ativa{grid-auto-flow:row dense}
- .ep-trab{grid-column:1;grid-row:span 2}.ep-venc{grid-column:2}.ep-dias{grid-column:2}.ep-desc{grid-column:3;grid-row:span 2}
- .dx-f{grid-template-columns:1.7fr 1fr .65fr}.dx-f input[type=date]{font-size:13px}.dx-f .campo input,.dx-f .campo select{padding-left:8px;padding-right:4px}
-}
-@media (min-width:1500px){#t-emp{max-width:1600px}#t-emp.ativa{grid-template-columns:repeat(4,minmax(0,1fr))}.ep-trab,.ep-desc{grid-row:auto}.ep-dias{grid-column:4}}
 /* FGTS informativo, botão de excluir */
 .lin.info .num{color:var(--muted);font-weight:600}
 .lin.info em{color:var(--muted)}
@@ -710,6 +734,7 @@ input[type=date],input[type=month]{-webkit-appearance:none;appearance:none}
    <div class="card"><h3>Preferências</h3>
     <label class="lin sw"><span>Modo escuro<em>Alterna entre claro e escuro</em></span><input type="checkbox" id="p-tema" onchange="tema()"></label>
     <label class="lin sw"><span>Avisos de pagamento<em>Receber notificações do holerite</em></span><input type="checkbox" id="p-not" checked onchange="salvaNot()"></label>
+    <button class="lin" type="button" onclick="abreMenu()"><span>Personalizar menu<em>Ordem do menu e página inicial</em></span><span class="num">›</span></button>
    </div>
    <button class="btn sec" onclick="sair()">Sair da conta</button>
   </div>
@@ -763,7 +788,7 @@ input[type=date],input[type=month]{-webkit-appearance:none;appearance:none}
 <!-- Área da empresa: dados da folha -->
 <section class="tela" id="t-emp" data-v="trab" oninput="pintaEmp()" onchange="pintaEmp()">
  <div class="topo com-tabs"><h2>Folha de pagamento</h2><span class="pill">Área da empresa</span>
-  <div class="tabs mob-only" role="tablist"><button class="tab on" onclick="vista('t-emp','trab',this)">Trabalhador</button><button class="tab" onclick="vista('t-emp','venc',this)">Vencimentos</button><button class="tab" onclick="vista('t-emp','desc',this)">Descontos</button><button class="tab" onclick="vista('t-emp','dias',this)">Extras</button></div></div>
+  <div class="tabs mob-only" role="tablist"><button class="tab on" onclick="vista('t-emp','trab',this)">Trabalhador</button><button class="tab" onclick="vista('t-emp','venc',this)">Vencimentos</button><button class="tab" onclick="vista('t-emp','desc',this)">Descontos</button></div></div>
  <div class="func-bar"><label class="campo"><span>Funcionário</span><select id="em-func" onchange="selFunc(this.value)" aria-label="Escolher funcionário"></select></label><button class="btn sec" type="button" onclick="ir('t-emp-add')">+ Novo</button><button class="btn sec perigo" id="em-del" type="button" onclick="excluiFunc()" aria-label="Excluir funcionário"><svg viewBox="0 0 24 24"><path d="M4 7h16M10 11v6M14 11v6M6 7l1 13h10l1-13M9 7V4h6v3"/></svg><span>Excluir</span></button></div>
  <p class="hint">Escolha o funcionário e lance os valores. Ao salvar, o holerite, as horas extras e o comparativo dele passam a mostrar estes dados.</p>
  <div class="emp-grid">
@@ -775,7 +800,17 @@ input[type=date],input[type=month]{-webkit-appearance:none;appearance:none}
   </div>
   <div class="card ep ep-venc"><h3>Vencimentos</h3>
    <label class="campo"><span>Salário base (R$)</span><input id="em-sal" type="number" step="0.01" min="0" inputmode="decimal"></label>
-   <div class="duo"><label class="campo"><span>Horas extras 50%</span><input id="em-h50" type="number" step="0.5" min="0" inputmode="decimal"></label><label class="campo"><span>Horas extras 100%</span><input id="em-h100" type="number" step="0.5" min="0" inputmode="decimal"></label></div>
+   <input id="em-h50" type="hidden"><input id="em-h100" type="hidden">
+   <div class="dx-t">Horas extras</div>
+   <div class="dx-f">
+    <label class="campo dx-d"><span>Dia</span><input id="dx-data" type="date"></label>
+    <label class="campo dx-a"><span>Adicional</span><select id="dx-tipo"><option value="50">50%</option><option value="100">100%</option></select></label>
+    <label class="campo dx-h"><span>Horas</span><input id="dx-h" type="number" step="0.5" min="0.5" max="12" value="1" inputmode="decimal"></label>
+    <button class="dx-add" type="button" onclick="adicionaDia()" aria-label="Adicionar dia"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></button>
+   </div>
+   <p class="erro" id="dx-erro" role="alert"></p>
+   <div id="dx-lista" class="dx-l"></div>
+   <p class="aviso" id="dx-tot" style="margin:6px 0 0"></p>
    <p class="aviso" style="margin-top:0">O DSR sobre as horas extras é calculado automaticamente.</p>
   </div>
   <div class="card ep ep-desc"><h3>Descontos</h3>
@@ -784,16 +819,6 @@ input[type=date],input[type=month]{-webkit-appearance:none;appearance:none}
    <label class="campo"><span>INSS (R$)</span><input id="em-inss" type="number" step="0.01" min="0" inputmode="decimal"></label>
    <label class="lin sw"><span>IRRF automático<em>Sobre o bruto menos o INSS</em></span><input type="checkbox" id="em-irrf-auto" checked></label>
    <label class="campo"><span>IRRF (R$)</span><input id="em-irrf" type="number" step="0.01" min="0" inputmode="decimal"></label>
-  </div>
-  <div class="card ep ep-dias"><h3>Dias de horas extras</h3>
-   <div class="dx-f">
-    <label class="campo"><span>Dia</span><input id="dx-data" type="date"></label>
-    <label class="campo"><span>Adicional</span><select id="dx-tipo"><option value="50">50%</option><option value="100">100%</option></select></label>
-    <label class="campo"><span>Horas</span><input id="dx-h" type="number" step="0.5" min="0.5" max="12" value="1" inputmode="decimal"></label>
-    <button class="btn" type="button" onclick="adicionaDia()">+ Adicionar</button>
-   </div>
-   <p class="erro" id="dx-erro" role="alert"></p>
-   <div id="dx-lista" class="dx-l"></div>
   </div>
  </div>
  <div class="emp-bar"><div class="eb-liq"><small>Prévia do líquido do trabalhador</small><div class="v num" id="em-liq"></div><div class="d num" id="em-det"></div></div><button class="btn-claro" onclick="salvaEmp()">Salvar e enviar</button></div>
@@ -809,6 +834,7 @@ input[type=date],input[type=month]{-webkit-appearance:none;appearance:none}
  </div>
  <div class="card"><h3>Preferências</h3>
   <label class="lin sw"><span>Modo escuro<em>Alterna entre claro e escuro</em></span><input type="checkbox" id="pe-tema" onchange="tema()"></label>
+  <button class="lin" type="button" onclick="abreMenu()"><span>Personalizar menu<em>Ordem do menu e página inicial</em></span><span class="num">›</span></button>
  </div>
  <button class="btn sec" onclick="restauraEmp()">Restaurar dados de exemplo</button>
  <button class="btn sec" onclick="sair()">Sair da conta</button>
@@ -845,6 +871,15 @@ input[type=date],input[type=month]{-webkit-appearance:none;appearance:none}
 </div>
 <div class="modal" id="modal-res" onclick="if(event.target===this)fecharRes()">
  <div class="sheet" role="dialog" aria-modal="true"><div id="m-res"></div><button class="btn" style="margin-top:14px" onclick="fecharRes()">Fechar</button></div>
+</div>
+<div class="modal" id="modal-menu" onclick="if(event.target===this)fechaMenu()">
+ <div class="sheet" role="dialog" aria-modal="true" aria-labelledby="mn-t"><h3 id="mn-t">Personalizar menu</h3>
+  <p>Use as setas para mudar a ordem do menu. O Perfil fica sempre por último.</p>
+  <div id="mn-l"></div>
+  <label class="campo" style="margin-top:12px"><span>Página inicial (a primeira tela ao entrar)</span><select id="mn-ini" onchange="setIni(this.value)"></select></label>
+  <button class="btn sec" type="button" onclick="restauraMenu()" style="margin-bottom:8px">Restaurar padrão</button>
+  <button class="btn" type="button" onclick="fechaMenu()">Concluído</button>
+ </div>
 </div>
 <div class="toast" id="toast" role="status"></div>
 
@@ -970,15 +1005,15 @@ function entrar(){const emp=papel==='emp',c=$('cpf').value.replace(/\D/g,'');
  if(c.length!==(emp?14:11)){$('erro').textContent=emp?'Digite um CNPJ com 14 números.':'Digite um CPF com 11 números.';return}
  if(!$('senha').value){$('erro').textContent='Digite sua senha.';return}
  $('erro').textContent='';
- if(emp){window.cnpjUsr=$('cpf').value;fillEmp();ir('t-emp-home')}
+ if(emp){window.cnpjUsr=$('cpf').value;fillEmp();ir(INI.emp)}
  else{window.cpfUsr=$('cpf').value;
   /* sem autenticação real: o CPF procura o funcionário cadastrado; se não achar, mostra o primeiro (demonstração) */
-  usaFunc(FUNC.find(f=>f.cpf.replace(/\D/g,'')===c)||FUNC[0]);renderTrab();montaComp();ir('t-home')}}
+  usaFunc(FUNC.find(f=>f.cpf.replace(/\D/g,'')===c)||FUNC[0]);renderTrab();montaComp();ir(INI.trab)}}
 
 /* ---- modal, toast, tema ---- */
 function abrir(t,d,c){$('m-t').textContent=t;$('m-d').textContent=d;$('m-c').innerText=c;$('modal').classList.add('on')}
 function fechar(){$('modal').classList.remove('on')}
-document.addEventListener('keydown',e=>{if(e.key==='Escape'){fechar();fecharRes()}});
+document.addEventListener('keydown',e=>{if(e.key==='Escape'){fechar();fecharRes();fechaMenu()}});
 let tt;function toast(m){const e=$('toast');e.textContent=m;e.classList.add('on');clearTimeout(tt);tt=setTimeout(()=>e.classList.remove('on'),2200)}
 function tema(){const r=document.documentElement,esc=matchMedia('(prefers-color-scheme:dark)').matches;
  const atual=r.dataset.theme||(esc?'dark':'light');const novo=atual==='dark'?'light':'dark';r.dataset.theme=novo;
@@ -1065,7 +1100,7 @@ const diasMes=(d,t)=>(d.dias||[]).filter(x=>x.t===t&&String(x.d).startsWith(d.me
 function pintaDias(){const mes=$('em-mes').value||funcSel().dados.mes;
  if(/^\d{4}-\d{2}$/.test(mes)){const[y,m]=mes.split('-').map(Number);$('dx-data').min=mes+'-01';$('dx-data').max=mes+'-'+pad(new Date(y,m,0).getDate())}
  const L=DIAS.filter(x=>String(x.d).startsWith(mes)).sort((a,b)=>a.d<b.d?-1:1);
- $('dx-lista').innerHTML=L.length?L.map(x=>`<div class="lin"><span>${dFmt(x.d)}<em>${x.t}% · ${fmtH(x.h)} h</em></span><button class="x" type="button" aria-label="Remover ${dFmt(x.d)}" onclick="removeDia('${x.d}',${x.t})"><svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg></button></div>`).join(''):'<p class="aviso" style="margin:6px 0 0">Nenhum dia lançado neste mês.</p>';ajustaDias()}
+ $('dx-lista').innerHTML=L.length?L.map(x=>`<div class="lin"><span>${dFmt(x.d)}<em>${x.t}% · ${fmtH(x.h)} h</em></span><button class="x" type="button" aria-label="Remover ${dFmt(x.d)}" onclick="removeDia('${x.d}',${x.t})"><svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg></button></div>`).join(''):'<p class="aviso" style="margin:6px 0 0">Nenhum dia lançado neste mês.</p>';$('dx-tot').textContent=`Total: ${fmtH(num($('em-h50').value))} h a 50% · ${fmtH(num($('em-h100').value))} h a 100%`;ajustaDias()}
 function somaDias(){const mes=$('em-mes').value||funcSel().dados.mes,t=k=>DIAS.filter(x=>x.t===k&&String(x.d).startsWith(mes)).reduce((a,x)=>a+x.h,0);
  $('em-h50').value=t(50);$('em-h100').value=t(100);pintaDias();pintaEmp()}
 function adicionaDia(){const e=$('dx-erro'),erro=m=>{e.textContent=m},mes=$('em-mes').value||funcSel().dados.mes,dia=$('dx-data').value,t=+$('dx-tipo').value,h=num($('dx-h').value);
@@ -1124,6 +1159,27 @@ function salvaFunc(){const v=i=>$(i).value.trim(),cpf=v('ad-cpf').replace(/\D/g,
  FUNC.push(f);SEL=f.id;gravar();['ad-nome','ad-cpf','ad-mat','ad-cargo','ad-adm','ad-sal'].forEach(i=>$(i).value='');erro('');
  fillEmp();toast('Funcionário adicionado. Lance os valores.');ir('t-emp')}
 
+/* ---- menu personalizável ---- */
+const MENU_NOMES={trab:{'t-home':'Início','t-hol':'Holerite','t-he':'Horas extras','t-comp':'Comparativo','t-sim':'Simuladores','t-alertas':'Avisos'},
+ emp:{'t-emp-home':'Início','t-emp-add':'Adicionar funcionário','t-emp-custo':'Custo com funcionários','t-emp':'Folha de pagamento'}};
+const MENU_PERFIL={trab:'t-perfil',emp:'t-emp-perfil'},MENU_NAV={trab:'nav',emp:'nav-emp'};
+let MENU={trab:Object.keys(MENU_NOMES.trab),emp:Object.keys(MENU_NOMES.emp)},INI={trab:'t-home',emp:'t-emp-home'};
+function carregaMenu(){try{const m=JSON.parse(localStorage.getItem('sj-menu')||'null');if(!m)return;
+ ['trab','emp'].forEach(k=>{const padrao=Object.keys(MENU_NOMES[k]),o=Array.isArray(m.ordem&&m.ordem[k])?m.ordem[k].filter(x=>padrao.includes(x)):[];
+  MENU[k]=[...new Set([...o,...padrao])];const i=m.ini&&m.ini[k];INI[k]=padrao.includes(i)?i:padrao[0]})}catch(e){}}
+function gravaMenu(){try{localStorage.setItem('sj-menu',JSON.stringify({ordem:MENU,ini:INI}))}catch(e){}}
+function aplicaMenu(){['trab','emp'].forEach(k=>{const nav=$(MENU_NAV[k]);MENU[k].forEach(id=>{const b=nav.querySelector(`[data-t="${id}"]`);if(b)nav.append(b)});
+ const pf=nav.querySelector(`[data-t="${MENU_PERFIL[k]}"]`);if(pf)nav.append(pf)})}
+function abreMenu(){pintaMenu();$('modal-menu').classList.add('on')}
+function fechaMenu(){$('modal-menu').classList.remove('on')}
+function pintaMenu(){const k=papel==='emp'?'emp':'trab',L=MENU[k],nm=MENU_NOMES[k];
+ const seta=(d,id,off)=>`<button type="button" class="mn-b" ${off?'disabled':''} aria-label="${d<0?'Subir':'Descer'} ${nm[id]}" onclick="moveMenu('${id}',${d})"><svg viewBox="0 0 24 24"><path d="${d<0?'M6 15l6-6 6 6':'M6 9l6 6 6-6'}"/></svg></button>`;
+ $('mn-l').innerHTML=L.map((id,i)=>`<div class="lin mn-i"><span>${nm[id]}</span><span class="mn-s">${seta(-1,id,i===0)}${seta(1,id,i===L.length-1)}</span></div>`).join('')+`<div class="lin mn-i mn-fixo"><span>Perfil<em>Sempre por último</em></span><span class="mn-s"><svg viewBox="0 0 24 24" class="mn-lock"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V8a4 4 0 018 0v3"/></svg></span></div>`;
+ $('mn-ini').innerHTML=L.map(id=>`<option value="${id}">${nm[id]}</option>`).join('');$('mn-ini').value=INI[k]}
+function moveMenu(id,d){const k=papel==='emp'?'emp':'trab',L=MENU[k],i=L.indexOf(id),j=i+d;if(i<0||j<0||j>=L.length)return;
+ [L[i],L[j]]=[L[j],L[i]];gravaMenu();aplicaMenu();pintaMenu();medeNav()}
+function setIni(id){const k=papel==='emp'?'emp':'trab';if(!MENU_NOMES[k][id])return;INI[k]=id;gravaMenu();toast('Página inicial: '+MENU_NOMES[k][id])}
+function restauraMenu(){const k=papel==='emp'?'emp':'trab';MENU[k]=Object.keys(MENU_NOMES[k]);INI[k]=MENU[k][0];gravaMenu();aplicaMenu();pintaMenu();medeNav();toast('Menu restaurado')}
 /* ---- perfil ---- */
 let cpfVer=false;
 const OLHO='<path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/>',OLHO_X='<path d="M3 3l18 18M10.6 5.2A10 10 0 0112 5c6.5 0 10 7 10 7a17 17 0 01-3.2 4M6.5 6.6C3.7 8.4 2 12 2 12s3.5 7 10 7c1.7 0 3.2-.4 4.5-1M9.9 9.9a3 3 0 004.2 4.2"/>';
@@ -1152,7 +1208,7 @@ document.addEventListener('keydown',e=>{
  const t=e.target,tela=t.closest&&t.closest('.tela');if(!tela)return;
  const tag=t.tagName,tp=t.type;
  if(tela.id==='t-login'&&tag==='INPUT'){e.preventDefault();entrar();return}
- if(tela.id==='t-emp'&&t.closest('.ep-dias')&&(tag==='INPUT'||tag==='SELECT')){e.preventDefault();adicionaDia();return}
+ if(tela.id==='t-emp'&&t.closest('.dx-f')&&(tag==='INPUT'||tag==='SELECT')){e.preventDefault();adicionaDia();return}
  if(tela.id==='t-emp'&&tag==='INPUT'&&tp!=='checkbox'){e.preventDefault();salvaEmp();return}
  if(tela.id==='t-emp-add'&&tag==='INPUT'){e.preventDefault();salvaFunc();return}
  if(tela.id==='t-sim'&&tag==='INPUT'){
@@ -1164,7 +1220,7 @@ document.addEventListener('keydown',e=>{
 });
 
 /* ---- início ---- */
-carrega();renderTrab();montaComp();fillEmp();configLogin();
+carrega();carregaMenu();aplicaMenu();renderTrab();montaComp();fillEmp();configLogin();
 </script>
 </body>
 </html>
