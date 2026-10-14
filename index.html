@@ -199,6 +199,7 @@ select{width:100%;padding:14px;border:1.5px solid var(--line);border-radius:12px
 /* ---------- Menu com 7 itens em telas pequenas ---------- */
 .nav button.so-desk{display:flex}
 .nav .lg{display:none}.nav .sm{display:inline}
+.atalho .lg{display:none}.atalho .sm{display:inline}
 @media (max-width:899px){
  .nav{padding-left:2px;padding-right:2px;gap:0}
  .nav button{flex:1 1 0;min-width:0;padding:6px 1px;font-size:10px;letter-spacing:-.01em}
@@ -206,6 +207,7 @@ select{width:100%;padding:14px;border:1.5px solid var(--line);border-radius:12px
 }
 @media (max-width:340px){.nav button{font-size:9px}.nav button svg{width:19px;height:19px}}
 @media (min-width:900px){.nav .lg{display:inline}.nav .sm{display:none}}
+@media (min-width:900px){.atalho .lg{display:inline}.atalho .sm{display:none}}
 /* ---------- Escolha de perfil e área da empresa ---------- */
 .papel .escolha{display:grid;gap:14px;margin:28px 0 18px}
 .papel .op{display:flex;gap:16px;align-items:center;text-align:left;width:100%;padding:18px;border:1.5px solid var(--line);border-radius:16px;background:var(--surface);box-shadow:var(--shadow);transition:transform .2s,border-color .2s}
@@ -428,6 +430,68 @@ input[type=date],input[type=month]{-webkit-appearance:none;appearance:none}
  .slide h1{font-size:36px}
  .logo-full{width:min(260px,60vw)}
 }
+/* --- CPF com olho, área da empresa (início, adicionar, custos, seletor de funcionário) --- */
+.cpf-w{display:inline-flex;align-items:center;gap:8px;margin-left:12px}
+.cpf-w .num{margin:0}
+.eye{width:34px;height:34px;border-radius:10px;border:0;background:var(--brand-soft);color:var(--brand);display:grid;place-items:center;flex:none;cursor:pointer}
+.eye svg{width:18px;height:18px;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.func-bar{display:flex;gap:10px;align-items:flex-end;margin-bottom:12px}
+.func-bar .campo{flex:1;margin:0;min-width:0}
+.func-bar .btn{width:auto;white-space:nowrap;padding:12px 16px;margin:0}
+.func-i{text-align:left;width:100%;border:0;font:inherit;color:inherit;cursor:pointer}
+.func-i small{display:block;font-size:12px;color:var(--muted)}
+.cu-lista .lin{cursor:pointer}
+.cu-lista,.cc .lin{font-size:14px}
+@media (max-width:899px){
+ #t-emp-custo[data-v="res"] .cc-por,#t-emp-custo[data-v="por"] .cc-res{display:none}
+ #t-emp-custo .topo.com-tabs .tabs{flex:1;width:auto}
+ #t-emp-custo .topo.com-tabs h2{display:none}
+ #t-emp .func-bar{margin-bottom:8px}
+ #t-emp .func-bar .campo span{display:none}
+ #t-emp .topo{margin-bottom:8px}
+ #t-emp .ep h3{display:none}
+ #t-emp .campo{margin-bottom:8px}
+ #t-emp .campo input,#t-emp select{padding:9px 10px}
+ #t-emp .func-bar .btn{padding:10px 14px}
+ #t-emp-home .avisos .alerta:nth-of-type(n+3){display:none}
+}
+@media (max-width:899px) and (max-height:640px){
+ #t-emp-home .avisos .alerta:nth-of-type(n+2),#t-emp-home .avisos h3{display:none}
+ #t-emp .ep .aviso{display:none}
+ #t-emp-add .card{padding:10px 12px}
+ .cc .aviso{display:none}
+}
+@media (max-width:899px) and (max-height:600px){
+ #t-emp{padding-bottom:calc(var(--navh,64px) + 54px)}
+ #t-emp .emp-bar small{display:none}
+ #t-emp .emp-bar{padding:6px 10px}
+ #t-emp .emp-bar .v{font-size:18px}
+ #t-emp .emp-bar .btn-claro{padding:9px 14px}
+ #t-emp .tela,#t-emp.tela{padding-top:6px}
+ #t-emp .topo .tab{padding:8px 4px}
+ #t-emp .campo{margin-bottom:6px}
+ #t-emp .lin.sw{padding:0 0 4px}
+ #t-emp .card{padding:8px 10px;margin-bottom:6px}
+}
+@media (min-width:900px){
+ #t-emp-home.ativa{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,1fr);column-gap:24px;align-items:start;align-content:start}
+ #t-emp-home>.ola{grid-column:1/-1}
+ #t-emp-home>.saldo,#t-emp-home>.atalhos{grid-column:1}
+ #t-emp-home>.avisos{grid-column:2;grid-row:2/4}
+ #t-emp-add{max-width:640px}
+ #t-emp-custo{max-width:1000px}
+ .custo-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:24px;align-items:start}
+ #t-emp .func-bar{grid-column:1/-1;max-width:520px}
+}
+@media (min-width:900px) and (max-height:780px){
+ #t-emp .ep h3{display:none}
+ #t-emp .campo{margin-bottom:8px}
+ #t-emp .campo input,#t-emp select{padding:8px 10px}
+ #t-emp .func-bar .campo span{display:none}
+ #t-emp .topo{margin-bottom:8px}
+ #t-emp .ep .aviso{display:none}
+ .atalho{padding:12px}
+}
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 </style>
 </head>
@@ -589,7 +653,7 @@ input[type=date],input[type=month]{-webkit-appearance:none;appearance:none}
   <div class="pg-c">
    <div class="card perfil-topo"><div class="avatar" id="p-av">MS</div><div><b id="p-nm">Maria Silva</b><small id="p-cg">Desenvolvedora · Tech SA</small></div></div>
    <div class="card"><h3>Dados do trabalho</h3>
-    <div class="lin"><span>CPF</span><span class="num" id="p-cpf"></span></div>
+    <div class="lin"><span>CPF</span><span class="cpf-w"><span class="num" id="p-cpf"></span><button class="eye" id="p-eye" type="button" aria-label="Mostrar CPF" aria-pressed="false" onclick="verCpf()"><svg viewBox="0 0 24 24" id="p-eye-s"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg></button></span></div>
     <div class="lin"><span>Matrícula</span><span class="num" id="p-mat">004821</span></div>
     <div class="lin"><span>Admissão</span><span class="num" id="p-adm">15/03/2022</span></div>
     <div class="lin"><span>Empresa</span><span id="p-emp">Tech SA</span></div>
@@ -605,11 +669,57 @@ input[type=date],input[type=month]{-webkit-appearance:none;appearance:none}
  </div>
 </section>
 
+<!-- Área da empresa: início -->
+<section class="tela" id="t-emp-home">
+ <div class="ola">
+  <div class="ola-l"><span class="logo-ico" aria-hidden="true"></span><div><small>Área da empresa</small><h1 id="eh-nome">Tech SA</h1></div></div>
+  <div class="btns"><button class="icon-btn" aria-label="Alternar tema" onclick="tema()"><svg viewBox="0 0 24 24"><path d="M21 13A9 9 0 1111 3a7 7 0 0010 10z"/></svg></button></div>
+ </div>
+ <button class="card saldo" onclick="ir('t-emp-custo')">
+  <small id="eh-rot">Custo mensal com funcionários</small>
+  <div class="v num" id="eh-v"></div>
+  <div class="d num" id="eh-d"></div>
+  <div class="bar"><i id="eh-bar"></i></div>
+  <div class="bar-l"><span>Vai para os funcionários</span><span id="eh-pct"></span></div>
+ </button>
+ <div class="atalhos">
+  <button class="atalho" onclick="ir('t-emp-add')"><span><svg viewBox="0 0 24 24"><circle cx="10" cy="8" r="4"/><path d="M2 21c0-4 3.5-6 8-6M18 9v6M15 12h6"/></svg></span><b class="lg">Adicionar funcionário</b><b class="sm">Adicionar</b></button>
+  <button class="atalho" onclick="ir('t-emp')"><span><svg viewBox="0 0 24 24"><path d="M6 3h9l4 4v14H6zM14 3v5h5M9 13h7M9 17h7"/></svg></span><b class="lg">Folha de pagamento</b><b class="sm">Folha</b></button>
+  <button class="atalho" onclick="ir('t-emp-custo')"><span><svg viewBox="0 0 24 24"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg></span><b class="lg">Custo com funcionários</b><b class="sm">Custos</b></button>
+  <button class="atalho" onclick="ir('t-emp-perfil')"><span><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/></svg></span>Perfil</button>
+ </div>
+ <div class="avisos"><h3>Funcionários</h3><div id="eh-lista"></div></div>
+</section>
+
+<!-- Área da empresa: adicionar funcionário -->
+<section class="tela" id="t-emp-add">
+ <div class="topo"><button class="icon-btn" aria-label="Voltar" onclick="ir('t-emp-home')"><svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></svg></button><h2>Adicionar funcionário</h2></div>
+ <div class="card">
+  <label class="campo"><span>Nome completo</span><input id="ad-nome" type="text" autocomplete="off"></label>
+  <div class="duo"><label class="campo"><span>CPF</span><input id="ad-cpf" inputmode="numeric" maxlength="14" placeholder="000.000.000-00" autocomplete="off"></label><label class="campo"><span>Matrícula</span><input id="ad-mat" type="text" inputmode="numeric" autocomplete="off"></label></div>
+  <div class="duo"><label class="campo"><span>Cargo</span><input id="ad-cargo" type="text" autocomplete="off"></label><label class="campo"><span>Admissão</span><input id="ad-adm" type="date"></label></div>
+  <label class="campo"><span>Salário base (R$)</span><input id="ad-sal" type="number" step="0.01" min="0" inputmode="decimal"></label>
+  <p class="erro" id="ad-erro" role="alert"></p>
+  <button class="btn" onclick="salvaFunc()">Adicionar e lançar valores</button>
+ </div>
+</section>
+
+<!-- Área da empresa: custo com funcionários -->
+<section class="tela" id="t-emp-custo" data-v="res">
+ <div class="topo com-tabs"><button class="icon-btn" aria-label="Voltar" onclick="ir('t-emp-home')"><svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></svg></button><h2>Custo com funcionários</h2>
+  <div class="tabs mob-only" role="tablist"><button class="tab on" onclick="vista('t-emp-custo','res',this)">Resumo</button><button class="tab" onclick="vista('t-emp-custo','por',this)">Por funcionário</button></div></div>
+ <div class="custo-grid">
+  <div class="card cc cc-res"><h3>Resumo do mês</h3><div id="cu-res"></div><p class="aviso" style="margin:10px 0 0">Estimativa: salário, horas extras, DSR e FGTS de 8%. Não inclui INSS patronal, férias e 13º provisionados.</p></div>
+  <div class="card cc cc-por"><h3>Por funcionário</h3><div id="cu-lista" class="cu-lista"></div></div>
+ </div>
+</section>
+
 <!-- Área da empresa: dados da folha -->
 <section class="tela" id="t-emp" data-v="trab" oninput="pintaEmp()" onchange="pintaEmp()">
  <div class="topo com-tabs"><h2>Folha de pagamento</h2><span class="pill">Área da empresa</span>
   <div class="tabs mob-only" role="tablist"><button class="tab on" onclick="vista('t-emp','trab',this)">Trabalhador</button><button class="tab" onclick="vista('t-emp','venc',this)">Vencimentos</button><button class="tab" onclick="vista('t-emp','desc',this)">Descontos</button></div></div>
- <p class="hint">Lance os dados do trabalhador. Ao salvar, o holerite, as horas extras e o comparativo dele passam a mostrar estes valores.</p>
+ <div class="func-bar"><label class="campo"><span>Funcionário</span><select id="em-func" onchange="selFunc(this.value)" aria-label="Escolher funcionário"></select></label><button class="btn sec" type="button" onclick="ir('t-emp-add')">+ Novo</button></div>
+ <p class="hint">Escolha o funcionário e lance os valores. Ao salvar, o holerite, as horas extras e o comparativo dele passam a mostrar estes dados.</p>
  <div class="emp-grid">
   <div class="card ep ep-trab"><h3>Trabalhador</h3>
    <label class="campo"><span>Nome completo</span><input id="em-nome" type="text" autocomplete="off"></label>
@@ -639,7 +749,7 @@ input[type=date],input[type=month]{-webkit-appearance:none;appearance:none}
  <div class="card perfil-topo"><div class="avatar" id="pe-av">TS</div><div><b id="pe-nome">Tech SA</b><small>Área da empresa</small></div></div>
  <div class="card"><h3>Dados da conta</h3>
   <div class="lin"><span>CNPJ</span><span class="num" id="pe-cnpj"></span></div>
-  <div class="lin"><span>Trabalhador cadastrado</span><span id="pe-trab"></span></div>
+  <div class="lin"><span>Funcionários cadastrados</span><span id="pe-trab"></span></div>
  </div>
  <div class="card"><h3>Preferências</h3>
   <label class="lin sw"><span>Modo escuro<em>Alterna entre claro e escuro</em></span><input type="checkbox" id="pe-tema" onchange="tema()"></label>
@@ -667,6 +777,8 @@ input[type=date],input[type=month]{-webkit-appearance:none;appearance:none}
 </nav>
 
 <nav class="nav" id="nav-emp">
+ <button data-t="t-emp-home" onclick="ir('t-emp-home')"><svg viewBox="0 0 24 24"><path d="M3 11l9-8 9 8M5 10v10h14V10"/></svg>Início</button>
+ <button data-t="t-emp-custo" onclick="ir('t-emp-custo')"><svg viewBox="0 0 24 24"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg><span class="lg">Custo com funcionários</span><span class="sm">Custos</span></button>
  <button data-t="t-emp" onclick="ir('t-emp')"><svg viewBox="0 0 24 24"><path d="M6 3h9l4 4v14H6zM14 3v5h5M9 13h7M9 17h7"/></svg><span class="lg">Folha de pagamento</span><span class="sm">Folha</span></button>
  <button data-t="t-emp-perfil" onclick="ir('t-emp-perfil')"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/></svg>Perfil</button>
 </nav>
@@ -695,10 +807,19 @@ const iniciais=n=>{const p=(n||'').trim().split(/\s+/).filter(Boolean);return(((
 
 /* ---- dados lançados pela empresa (ficam salvos neste navegador) ---- */
 const PADRAO={nome:'Maria Silva',cargo:'Desenvolvedora',empresa:'Tech SA',mat:'004821',adm:'2022-03-15',mes:'2024-07',salario:3000,he50:10,he100:2,vtPct:6,inssAuto:true,inssMan:0,irrfAuto:true,irrfMan:0,outros:0};
-let DADOS={...PADRAO},HIST={};
-try{const a=JSON.parse(localStorage.getItem('sj-dados')||'null');if(a&&typeof a==='object')DADOS={...PADRAO,...a};
- const h=JSON.parse(localStorage.getItem('sj-hist')||'null');if(h&&typeof h==='object')HIST=h}catch(e){}
-function gravar(){try{localStorage.setItem('sj-dados',JSON.stringify(DADOS));localStorage.setItem('sj-hist',JSON.stringify(HIST))}catch(e){}}
+const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+/* FUNC = funcionários cadastrados pela empresa; DADOS/HIST = os do funcionário que está sendo visto na área do trabalhador */
+let FUNC=[],DADOS={...PADRAO},HIST={},VISTO=null,SEL=null;
+const novoF=(o,cpf)=>({id:'f'+Date.now().toString(36)+Math.random().toString(36).slice(2,5),cpf:cpf||'',dados:{...PADRAO,...o},hist:{}});
+function usaFunc(f){VISTO=f;DADOS=f.dados;HIST=f.hist}
+function carrega(){
+ try{const f=JSON.parse(localStorage.getItem('sj-func')||'null');
+  if(Array.isArray(f)&&f.length)FUNC=f.map(x=>({id:String(x.id),cpf:x.cpf||'',dados:{...PADRAO,...x.dados},hist:(x.hist&&typeof x.hist==='object')?x.hist:{}}));
+  else{const a=JSON.parse(localStorage.getItem('sj-dados')||'null'),h=JSON.parse(localStorage.getItem('sj-hist')||'null');
+   if(a&&typeof a==='object')FUNC=[{id:'f1',cpf:'',dados:{...PADRAO,...a},hist:(h&&typeof h==='object')?h:{}}]}}catch(e){}
+ if(!FUNC.length)FUNC=[{id:'f1',cpf:'',dados:{...PADRAO},hist:{}}];
+ SEL=FUNC[0].id;usaFunc(FUNC[0])}
+function gravar(){try{localStorage.setItem('sj-func',JSON.stringify(FUNC))}catch(e){}}
 
 /* ---- tabelas e cálculo ---- */
 function inssTab(b){const f=[[1412,.075],[2666.68,.09],[4000.03,.12],[7786.02,.14]];let t=0,a=0;for(const[l,p]of f){if(b>a){t+=(Math.min(b,l)-a)*p;a=l}}return t}
@@ -752,11 +873,16 @@ function renderTrab(){
 
 /* ---- navegação ---- */
 const TELAS_TRAB=['t-home','t-hol','t-he','t-sim','t-alertas','t-comp','t-perfil'];
-const TELAS_EMP=['t-emp','t-emp-perfil'];
+const TELAS_EMP=['t-emp-home','t-emp-add','t-emp-custo','t-emp','t-emp-perfil'];
 function ir(id){const at=document.querySelector('.tela.ativa'),ant=at?at.id:id;
  document.querySelectorAll('.tela').forEach(t=>t.classList.remove('ativa','volta'));
  const n=$(id);n.classList.toggle('volta',id==='t-home'&&ant!=='t-login'&&ant!=='t-home');n.classList.add('ativa');
+ if(id==='t-perfil')cpfVer=false;
  if(id==='t-perfil'||id==='t-emp-perfil')pintaPerfil();
+ if(id==='t-emp-home')pintaEmpHome();
+ if(id==='t-emp-custo')pintaCusto();
+ if(id==='t-emp')pintaFuncSel();
+ if(id==='t-emp-add')$('ad-erro').textContent='';
  $('nav').classList.toggle('on',TELAS_TRAB.includes(id));
  $('nav-emp').classList.toggle('on',TELAS_EMP.includes(id));
  document.querySelectorAll('.nav button').forEach(b=>b.classList.toggle('on',b.dataset.t===id));medeNav();scrollTo(0,0)}
@@ -772,6 +898,7 @@ function configLogin(){const emp=papel==='emp';
  $('cpf').placeholder=emp?'00.000.000/0000-00':'000.000.000-00';
  $('cpf').maxLength=emp?18:14;$('cpf').value='';$('senha').value='';$('erro').textContent='';
  $('l-qr').style.display=emp?'none':'';}
+$('ad-cpf').addEventListener('input',e=>{const v=e.target.value.replace(/\D/g,'').slice(0,11).replace(/(\d{3})(\d)/,'$1.$2').replace(/(\d{3})(\d)/,'$1.$2').replace(/(\d{3})(\d{1,2})$/,'$1-$2');e.target.value=v});
 $('cpf').addEventListener('input',e=>{let v=e.target.value.replace(/\D/g,'');
  if(papel==='emp'){v=v.slice(0,14).replace(/^(\d{2})(\d)/,'$1.$2').replace(/^(\d{2})\.(\d{3})(\d)/,'$1.$2.$3').replace(/\.(\d{3})(\d)/,'.$1/$2').replace(/(\d{4})(\d)/,'$1-$2')}
  else{v=v.slice(0,11).replace(/(\d{3})(\d)/,'$1.$2').replace(/(\d{3})(\d)/,'$1.$2').replace(/(\d{3})(\d{1,2})$/,'$1-$2')}
@@ -780,8 +907,10 @@ function entrar(){const emp=papel==='emp',c=$('cpf').value.replace(/\D/g,'');
  if(c.length!==(emp?14:11)){$('erro').textContent=emp?'Digite um CNPJ com 14 números.':'Digite um CPF com 11 números.';return}
  if(!$('senha').value){$('erro').textContent='Digite sua senha.';return}
  $('erro').textContent='';
- if(emp){window.cnpjUsr=$('cpf').value;fillEmp();ir('t-emp')}
- else{window.cpfUsr=$('cpf').value;ir('t-home')}}
+ if(emp){window.cnpjUsr=$('cpf').value;fillEmp();ir('t-emp-home')}
+ else{window.cpfUsr=$('cpf').value;
+  /* sem autenticação real: o CPF procura o funcionário cadastrado; se não achar, mostra o primeiro (demonstração) */
+  usaFunc(FUNC.find(f=>f.cpf.replace(/\D/g,'')===c)||FUNC[0]);renderTrab();montaComp();ir('t-home')}}
 
 /* ---- modal, toast, tema ---- */
 function abrir(t,d,c){$('m-t').textContent=t;$('m-d').textContent=d;$('m-c').innerText=c;$('modal').classList.add('on')}
@@ -850,13 +979,13 @@ function pintaComp(){const a=MESES[+$('c-a').value],b=MESES[+$('c-b').value];
 
 /* ---- área da empresa ---- */
 function lerEmp(){const v=i=>$(i).value;return{
- nome:v('em-nome').trim(),cargo:v('em-cargo').trim(),empresa:v('em-emp').trim(),mat:v('em-mat').trim(),adm:v('em-adm'),mes:v('em-mes')||DADOS.mes,
+ nome:v('em-nome').trim(),cargo:v('em-cargo').trim(),empresa:v('em-emp').trim(),mat:v('em-mat').trim(),adm:v('em-adm'),mes:v('em-mes')||funcSel().dados.mes,
  salario:Math.max(0,num(v('em-sal'))),he50:Math.max(0,num(v('em-h50'))),he100:Math.max(0,num(v('em-h100'))),
  vtPct:Math.min(100,Math.max(0,num(v('em-vt')))),
  inssAuto:$('em-inss-auto').checked,inssMan:Math.max(0,num(v('em-inss'))),
  irrfAuto:$('em-irrf-auto').checked,irrfMan:Math.max(0,num(v('em-irrf'))),
  outros:Math.max(0,num(v('em-outros')))}}
-function fillEmp(){const d=DADOS,s=(i,x)=>$(i).value=x;
+function fillEmp(){pintaFuncSel();const d=funcSel().dados,s=(i,x)=>$(i).value=x;
  s('em-nome',d.nome);s('em-cargo',d.cargo);s('em-emp',d.empresa);s('em-mat',d.mat);s('em-adm',d.adm);s('em-mes',d.mes);
  s('em-sal',d.salario);s('em-h50',d.he50);s('em-h100',d.he100);s('em-vt',d.vtPct);
  $('em-inss-auto').checked=d.inssAuto;s('em-inss',d.inssMan||'');
@@ -871,19 +1000,51 @@ function salvaEmp(){const d=lerEmp();
  if(!d.nome){toast('Informe o nome do trabalhador');$('em-nome').focus();return}
  if(!d.salario){toast('Informe o salário base');$('em-sal').focus();return}
  if(!/^\d{4}-\d{2}$/.test(d.mes)){toast('Escolha o mês de referência');return}
- if(!d.empresa)d.empresa=DADOS.empresa;if(!d.adm)d.adm=DADOS.adm;
- DADOS=d;HIST[d.mes]={...d};gravar();renderTrab();montaComp();toast('Dados enviados ao trabalhador')}
-function restauraEmp(){DADOS={...PADRAO};HIST={};gravar();fillEmp();renderTrab();montaComp();toast('Dados de exemplo restaurados')}
+ const f=funcSel();if(!d.empresa)d.empresa=f.dados.empresa;if(!d.adm)d.adm=f.dados.adm;
+ f.dados=d;f.hist[d.mes]={...d};if(VISTO===f)usaFunc(f);gravar();renderTrab();montaComp();pintaFuncSel();toast(`Dados de ${d.nome.split(' ')[0]} enviados`)}
+function restauraEmp(){FUNC=[{id:'f1',cpf:'',dados:{...PADRAO},hist:{}}];SEL='f1';usaFunc(FUNC[0]);gravar();fillEmp();renderTrab();montaComp();toast('Dados de exemplo restaurados')}
+
+/* ---- vários funcionários ---- */
+const funcSel=()=>FUNC.find(f=>f.id===SEL)||FUNC[0];
+function pintaFuncSel(){const e=$('em-func');if(!e)return;
+ e.innerHTML=FUNC.map(f=>`<option value="${esc(f.id)}">${esc(f.dados.nome||'Sem nome')}${f.dados.cargo?' · '+esc(f.dados.cargo):''}</option>`).join('');e.value=funcSel().id}
+function selFunc(id){SEL=id;fillEmp()}
+function abreFolha(id){SEL=id;fillEmp();ir('t-emp')}
+function custoF(f){const c=compute(f.dados),fgts=c.bruto*.08;return{f,c,fgts,total:c.bruto+fgts}}
+function pintaEmpHome(){const L=FUNC.map(custoF),tot=L.reduce((s,x)=>s+x.total,0),liq=L.reduce((s,x)=>s+x.c.liq,0),n=L.length;
+ $('eh-nome').textContent=FUNC[0].dados.empresa;
+ $('eh-v').textContent=R(tot);$('eh-d').textContent=`${n} funcionário${n>1?'s':''} · Líquido pago ${R(liq)}`;
+ const pc=tot>0?liq/tot*100:0;$('eh-bar').style.width=Math.max(0,Math.min(100,pc))+'%';$('eh-pct').textContent=pc.toFixed(0)+'% do custo';
+ $('eh-lista').innerHTML=L.slice(0,4).map(x=>`<button class="alerta func-i" onclick="abreFolha('${esc(x.f.id)}')"><div><b>${esc(x.f.dados.nome||'Sem nome')}</b>${esc(x.f.dados.cargo||'—')} · custo ${R(x.total)}</div></button>`).join('')}
+function pintaCusto(){const L=FUNC.map(custoF),sm=k=>L.reduce((s,x)=>s+k(x),0),tot=sm(x=>x.total);
+ const row=(n,v,t)=>`<div class="${t?'tot':'lin'}"><span>${n}</span><span class="num">${R(v)}</span></div>`;
+ $('cu-res').innerHTML=row('Salários, extras e DSR (bruto)',sm(x=>x.c.bruto))+row('FGTS (8%)',sm(x=>x.fgts))+row('Custo total',tot,1)+row('Líquido pago aos funcionários',sm(x=>x.c.liq))+row('Descontos retidos (INSS, IRRF…)',sm(x=>x.c.desc));
+ $('cu-lista').innerHTML=L.slice().sort((a,b)=>b.total-a.total).map(x=>`<button class="lin" onclick="abreFolha('${esc(x.f.id)}')"><span>${esc(x.f.dados.nome||'Sem nome')}<em>${esc(x.f.dados.cargo||'—')} · líquido ${R(x.c.liq)}</em></span><span class="num">${R(x.total)}</span></button>`).join('')}
+function salvaFunc(){const v=i=>$(i).value.trim(),cpf=v('ad-cpf').replace(/\D/g,''),sal=num($('ad-sal').value),e=$('ad-erro'),erro=m=>{e.textContent=m};
+ if(!v('ad-nome')){erro('Informe o nome do funcionário.');$('ad-nome').focus();return}
+ if(cpf&&cpf.length!==11){erro('O CPF precisa ter 11 números (ou deixe em branco).');$('ad-cpf').focus();return}
+ if(cpf&&FUNC.some(f=>f.cpf.replace(/\D/g,'')===cpf)){erro('Já existe um funcionário com este CPF.');return}
+ if(!(sal>0)){erro('Informe o salário base.');$('ad-sal').focus();return}
+ const base=FUNC[0].dados,mat=v('ad-mat')||String(Math.max(0,...FUNC.map(x=>parseInt(x.dados.mat,10)||0))+1).padStart(6,'0');
+ const f=novoF({nome:v('ad-nome'),cargo:v('ad-cargo'),empresa:base.empresa,mat,adm:$('ad-adm').value||new Date().toISOString().slice(0,10),mes:base.mes,salario:sal,he50:0,he100:0},cpf?$('ad-cpf').value:'');
+ FUNC.push(f);SEL=f.id;gravar();['ad-nome','ad-cpf','ad-mat','ad-cargo','ad-adm','ad-sal'].forEach(i=>$(i).value='');erro('');
+ fillEmp();toast('Funcionário adicionado. Lance os valores.');ir('t-emp')}
 
 /* ---- perfil ---- */
+let cpfVer=false;
+const OLHO='<path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/>',OLHO_X='<path d="M3 3l18 18M10.6 5.2A10 10 0 0112 5c6.5 0 10 7 10 7a17 17 0 01-3.2 4M6.5 6.6C3.7 8.4 2 12 2 12s3.5 7 10 7c1.7 0 3.2-.4 4.5-1M9.9 9.9a3 3 0 004.2 4.2"/>';
+function pintaCpf(){const c=window.cpfUsr||'',b=$('p-eye');
+ $('p-cpf').textContent=cpfVer?(c||'—'):'•••.•••.•••-••';
+ $('p-eye-s').innerHTML=cpfVer?OLHO_X:OLHO;b.setAttribute('aria-label',cpfVer?'Ocultar CPF':'Mostrar CPF');b.setAttribute('aria-pressed',cpfVer?'true':'false')}
+function verCpf(){cpfVer=!cpfVer;pintaCpf()}
 function pintaPerfil(){const d=DADOS;
  const dark=(document.documentElement.dataset.theme||(matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light'))==='dark';
  $('p-tema').checked=dark;$('pe-tema').checked=dark;
- const c=window.cpfUsr||'';$('p-cpf').textContent=c.length===14?`•••.${c.slice(4,7)}.•••-••`:'•••.•••.•••-••';
+ pintaCpf();
  const j=window.cnpjUsr||'';$('pe-cnpj').textContent=j.length===18?`••.•••.•••/${j.slice(11,15)}-••`:'••.•••.•••/••••-••';
- $('pe-nome').textContent=d.empresa;$('pe-av').textContent=iniciais(d.empresa);$('pe-trab').textContent=d.nome}
+ const emp=FUNC[0].dados.empresa;$('pe-nome').textContent=emp;$('pe-av').textContent=iniciais(emp);$('pe-trab').textContent=FUNC.length}
 function salvaNot(){try{localStorage.setItem('sj-not',$('p-not').checked?'1':'0')}catch(e){}toast($('p-not').checked?'Avisos ativados':'Avisos desativados')}
-function sair(){$('senha').value='';window.cpfUsr='';window.cnpjUsr='';ir('t-papel')}
+function sair(){cpfVer=false;$('senha').value='';window.cpfUsr='';window.cnpjUsr='';ir('t-papel')}
 try{if(localStorage.getItem('sj-not')==='0')$('p-not').checked=false}catch(e){}
 
 /* ---- tecla Enter ---- */
@@ -893,6 +1054,7 @@ document.addEventListener('keydown',e=>{
  const tag=t.tagName,tp=t.type;
  if(tela.id==='t-login'&&tag==='INPUT'){e.preventDefault();entrar();return}
  if(tela.id==='t-emp'&&tag==='INPUT'&&tp!=='checkbox'){e.preventDefault();salvaEmp();return}
+ if(tela.id==='t-emp-add'&&tag==='INPUT'){e.preventDefault();salvaFunc();return}
  if(tela.id==='t-sim'&&tag==='INPUT'){
   e.preventDefault();
   if($('a-resc').style.display!=='none')calcResc();
@@ -902,7 +1064,7 @@ document.addEventListener('keydown',e=>{
 });
 
 /* ---- início ---- */
-renderTrab();montaComp();fillEmp();configLogin();
+carrega();renderTrab();montaComp();fillEmp();configLogin();
 </script>
 </body>
 </html>
