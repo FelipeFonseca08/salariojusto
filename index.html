@@ -623,7 +623,7 @@ input[type=date],input[type=month]{-webkit-appearance:none;appearance:none}
   </div>
  </div>
  <button class="card saldo" onclick="ir('t-hol')">
-  <small id="h-rot">Líquido de julho de 2024</small>
+  <small id="h-rot">Líquido de setembro de 2026</small>
   <div class="v num" id="h-liq"></div>
   <div class="d num" id="h-det"></div>
   <div class="bar"><i id="h-bar"></i></div>
@@ -642,7 +642,7 @@ input[type=date],input[type=month]{-webkit-appearance:none;appearance:none}
 
 <!-- Holerite -->
 <section class="tela" id="t-hol">
- <div class="topo"><button class="icon-btn" aria-label="Voltar" onclick="ir('t-home')"><svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></svg></button><div class="tt"><h2 id="hol-t">Holerite · Julho 2024</h2></div>
+ <div class="topo"><button class="icon-btn" aria-label="Voltar" onclick="ir('t-home')"><svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></svg></button><div class="tt"><h2 id="hol-t">Holerite · Setembro 2026</h2></div>
   <button class="icon-btn" aria-label="Baixar PDF" title="Baixar PDF" onclick="toast('PDF baixado')"><svg viewBox="0 0 24 24"><path d="M12 4v11M7 11l5 5 5-5M5 20h14"/></svg></button>
   <button class="icon-btn" aria-label="Compartilhar" title="Compartilhar" onclick="toast('Link de compartilhamento copiado')"><svg viewBox="0 0 24 24"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="M8.6 10.5l6.8-4M8.6 13.5l6.8 4"/></svg></button></div>
  <p class="sub-hol" id="hol-sub"></p>
@@ -650,7 +650,7 @@ input[type=date],input[type=month]{-webkit-appearance:none;appearance:none}
  <div class="card"><h3>Descontos</h3><div id="h-desc"></div>
   <div class="tot"><span>Líquido a receber</span><span class="num" id="h-liq2"></span></div>
   <div id="h-fgts" class="fgts-b"></div></div>
- <p class="aviso">Toque num item para ver o cálculo. Valores estimados (tabelas de INSS e IRRF de 2024).</p>
+ <p class="aviso">Toque num item para ver o cálculo. Valores estimados (tabelas de INSS e IRRF de 2026).</p>
 </section>
 
 <!-- Horas extras -->
@@ -679,7 +679,7 @@ input[type=date],input[type=month]{-webkit-appearance:none;appearance:none}
     </div>
     <div class="duo">
      <label class="campo"><span>Admissão</span><input type="date" id="r-adm" value="2022-03-15"></label>
-     <label class="campo"><span>Saída</span><input type="date" id="r-sai" value="2024-07-31"></label>
+     <label class="campo"><span>Saída</span><input type="date" id="r-sai" value="2026-09-30"></label>
     </div>
     <label class="campo"><span>Salário bruto (R$)</span><input type="number" id="r-sal" value="3800" step="0.01" inputmode="decimal"></label>
     <button class="btn" onclick="calcResc()">Calcular rescisão</button>
@@ -817,9 +817,9 @@ input[type=date],input[type=month]{-webkit-appearance:none;appearance:none}
   </div>
   <div class="card ep ep-desc"><h3>Descontos</h3>
    <div class="duo"><label class="campo"><span>Vale-transporte (%)</span><input id="em-vt" type="number" step="0.1" min="0" max="100" inputmode="decimal"></label><label class="campo"><span>Outros (R$)</span><input id="em-outros" type="number" step="0.01" min="0" inputmode="decimal" placeholder="0,00"></label></div>
-   <label class="lin sw"><span>INSS automático<em>Tabela progressiva de 2024</em></span><input type="checkbox" id="em-inss-auto" checked></label>
+   <label class="lin sw"><span>INSS automático<em>Tabela progressiva de 2026</em></span><input type="checkbox" id="em-inss-auto" checked></label>
    <label class="campo"><span>INSS (R$)</span><input id="em-inss" type="number" step="0.01" min="0" inputmode="decimal"></label>
-   <label class="lin sw"><span>IRRF automático<em>Sobre o bruto menos o INSS</em></span><input type="checkbox" id="em-irrf-auto" checked></label>
+   <label class="lin sw"><span>IRRF automático<em>Tabela de 2026 com o redutor</em></span><input type="checkbox" id="em-irrf-auto" checked></label>
    <label class="campo"><span>IRRF (R$)</span><input id="em-irrf" type="number" step="0.01" min="0" inputmode="decimal"></label>
   </div>
  </div>
@@ -898,7 +898,7 @@ const addMes=(m,n)=>{const i=mesInfo(m),t=i.ano*12+i.mes-1+n;return `${Math.floo
 const iniciais=n=>{const p=(n||'').trim().split(/\s+/).filter(Boolean);return(((p[0]||'?')[0])+(p.length>1?p[p.length-1][0]:'')).toUpperCase()};
 
 /* ---- dados lançados pela empresa (ficam salvos neste navegador) ---- */
-const PADRAO={nome:'Maria Silva',cargo:'Desenvolvedora',empresa:'Tech SA',mat:'004821',adm:'2022-03-15',mes:'2024-07',salario:3000,he50:10,he100:2,dias:[{d:'2024-07-02',t:50,h:2},{d:'2024-07-04',t:50,h:3},{d:'2024-07-09',t:50,h:2},{d:'2024-07-16',t:50,h:2},{d:'2024-07-23',t:50,h:1},{d:'2024-07-07',t:100,h:2}],vtPct:6,inssAuto:true,inssMan:0,irrfAuto:true,irrfMan:0,outros:0};
+const PADRAO={nome:'Maria Silva',cargo:'Desenvolvedora',empresa:'Tech SA',mat:'004821',adm:'2022-03-15',mes:'2026-09',salario:3000,he50:10,he100:2,dias:[{d:'2026-09-01',t:50,h:2},{d:'2026-09-03',t:50,h:3},{d:'2026-09-08',t:50,h:2},{d:'2026-09-15',t:50,h:2},{d:'2026-09-22',t:50,h:1},{d:'2026-09-06',t:100,h:2}],vtPct:6,inssAuto:true,inssMan:0,irrfAuto:true,irrfMan:0,outros:0};
 const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 /* FUNC = funcionários cadastrados pela empresa; DADOS/HIST = os do funcionário que está sendo visto na área do trabalhador */
 let FUNC=[],DADOS={...PADRAO},HIST={},VISTO=null,SEL=null;
@@ -910,21 +910,32 @@ function carrega(){
   else{const a=JSON.parse(localStorage.getItem('sj-dados')||'null'),h=JSON.parse(localStorage.getItem('sj-hist')||'null');
    if(a&&typeof a==='object')FUNC=[{id:'f1',cpf:'',dados:{...PADRAO,...a},hist:(h&&typeof h==='object')?h:{}}]}}catch(e){}
  if(!FUNC.length)FUNC=[{id:'f1',cpf:'',dados:{...PADRAO},hist:{}}];
+ /* dados salvos em anos anteriores passam para o ano atual (mês de referência e dias de horas extras) */
+ const ano=new Date().getFullYear();let mudou=false;
+ FUNC.forEach(f=>{const d=f.dados,y=parseInt(String(d.mes).slice(0,4),10);if(y&&y<ano){d.mes=ano+String(d.mes).slice(4);d.dias=(d.dias||[]).map(x=>({...x,d:String(x.d).replace(/^\d{4}/,y=>String(y)===String(ano)?y:ano)}));mudou=true}});
+ if(mudou)gravar();
  SEL=FUNC[0].id;usaFunc(FUNC[0])}
 function gravar(){try{localStorage.setItem('sj-func',JSON.stringify(FUNC))}catch(e){}}
 
 /* ---- tabelas e cálculo ---- */
-function inssTab(b){const f=[[1412,.075],[2666.68,.09],[4000.03,.12],[7786.02,.14]];let t=0,a=0;for(const[l,p]of f){if(b>a){t+=(Math.min(b,l)-a)*p;a=l}}return t}
+/* tabelas de 2026: INSS (Portaria Interministerial MPS/MF nº 13/2026) e IRRF (Receita Federal + Lei 15.270/2025) */
+const r2=x=>Math.round(x*100+1e-7)/100;
+function inssTab(b){const f=[[1621,.075],[2902.84,.09],[4354.27,.12],[8475.55,.14]];let t=0,a=0;for(const[l,p]of f){if(b>a){t+=r2((Math.min(b,l)-a)*p);a=l}}return r2(t)}
 function irrfTab(b){
- if(b>4664.68)return{v:b*.275-896,a:'27,5%',d:896};
- if(b>3751.05)return{v:b*.225-662.77,a:'22,5%',d:662.77};
- if(b>2826.65)return{v:b*.15-381.44,a:'15%',d:381.44};
- if(b>2259.20)return{v:b*.075-169.44,a:'7,5%',d:169.44};
+ if(b>4664.68)return{v:b*.275-908.73,a:'27,5%',d:908.73};
+ if(b>3751.05)return{v:b*.225-675.49,a:'22,5%',d:675.49};
+ if(b>2826.65)return{v:b*.15-394.16,a:'15%',d:394.16};
+ if(b>2428.80)return{v:b*.075-182.16,a:'7,5%',d:182.16};
  return{v:0,a:'isento',d:0}}
+/* IRRF mensal 2026: base = bruto − (INSS ou desconto simplificado de R$ 607,20, o que for maior); imposto pela tabela; depois o redutor da Lei 15.270 (calculado sobre o bruto) */
+function irrfCalc(bruto,inss){
+ const simp=607.20,usaSimp=simp>inss,ded=usaSimp?simp:inss,base=Math.max(0,bruto-ded),t=irrfTab(base),imp=Math.max(0,t.v);
+ let red=0;if(bruto<=5000)red=312.89;else if(bruto<=7350)red=Math.max(0,978.62-0.133145*bruto);
+ red=Math.min(red,imp);return{v:r2(Math.max(0,imp-red)),a:t.a,d:t.d,base,ded,usaSimp,imp:r2(imp),red:r2(red)}}
 function compute(d){
  const hora=d.salario/220,v50=d.he50*hora*1.5,v100=d.he100*hora*2,he=v50+v100,dsr=he/26*4,bruto=d.salario+he+dsr;
- const inssAut=inssTab(bruto),inss=d.inssAuto?inssAut:d.inssMan,base=bruto-inss,ir=irrfTab(base);
- const irrf=d.irrfAuto?Math.max(0,ir.v):d.irrfMan,vt=d.salario*d.vtPct/100,outros=d.outros,desc=inss+irrf+vt+outros;
+ const inssAut=inssTab(bruto),inss=d.inssAuto?inssAut:d.inssMan,ir=irrfCalc(bruto,inss),base=ir.base;
+ const irrf=d.irrfAuto?ir.v:d.irrfMan,vt=d.salario*d.vtPct/100,outros=d.outros,desc=inss+irrf+vt+outros;
  return{hora,v50,v100,he,dsr,bruto,inss,inssAut,base,ir,irrf,vt,outros,desc,liq:bruto-desc,salario:d.salario,horas:d.he50+d.he100}}
 
 /* ---- visão do trabalhador ---- */
@@ -934,6 +945,10 @@ function diasTxt(d,t,c){const L=diasMes(d,t),h=t===50?d.he50:d.he100;
  const m=t===50?1.5:2,soma=L.reduce((a,x)=>a+x.h,0);
  let r=L.map(x=>`${dFmt(x.d)} · ${fmtH(x.h)} h · ${R(x.h*c.hora*m)}`).join('\n')+`\n\nTotal dos dias: ${fmtH(soma)} h · ${R(soma*c.hora*m)}`;
  if(Math.abs(soma-h)>.001)r+=`\nTotal lançado pela empresa: ${fmtH(h)} h`;return r}
+function irrfTxt(c){const x=c.ir;let t=`Bruto: ${R(c.bruto)}\n${x.usaSimp?'Desconto simplificado':'INSS'}: − ${R(x.ded)}${x.usaSimp?' (mais vantajoso que o INSS)':''}\nBase de cálculo: ${R(x.base)}\n`;
+ t+=x.a==='isento'?'Faixa isenta pela tabela: R$ 0,00':`Tabela: ${R(x.base)} × ${x.a} − ${R(x.d)} = ${R(x.imp)}`;
+ if(x.red>0)t+=`\nRedutor da Lei 15.270: − ${R(x.red)}`;
+ return t+`\nIRRF: ${R(c.irrf)}`}
 function renderTrab(){
  const d=DADOS,c=compute(d),mi=mesInfo(d.mes),pg=`05/${pad(mesInfo(addMes(d.mes,1)).mes)}`;
  $('u-nome').textContent=d.nome;
@@ -946,7 +961,7 @@ function renderTrab(){
   venc.push(['DSR sobre extras',c.dsr,'Descanso semanal remunerado: reflexo das horas extras nos domingos e feriados.',`${R(c.he)} ÷ 26 dias úteis × 4 descansos = ${R(c.dsr)}`])}
  const desc=[
   ['INSS',c.inss,'Contribuição previdenciária. Na tabela progressiva, cada faixa do salário tem seu percentual.',d.inssAuto?`Bruto ${R(c.bruto)}\nAlíquotas de 7,5% a 14% por faixa = ${R(c.inss)}`:`Valor informado pela empresa: ${R(c.inss)}`],
-  ['IRRF',c.irrf,'Imposto de renda retido na fonte, calculado sobre o bruto menos o INSS.',d.irrfAuto?(c.ir.a==='isento'?`Base: ${R(c.base)}\nFaixa isenta de IRRF`:`Base: ${R(c.base)}\n${c.ir.a} − dedução de ${R(c.ir.d)} = ${R(c.irrf)}`):`Valor informado pela empresa: ${R(c.irrf)}`],
+  ['IRRF',c.irrf,'Imposto de renda retido na fonte. Em 2026, quem ganha até R$ 5.000 não paga; entre R$ 5.000 e R$ 7.350 há um desconto que diminui aos poucos; acima disso vale a tabela normal.',d.irrfAuto?irrfTxt(c):`Valor informado pela empresa: ${R(c.irrf)}`],
   ['Vale-transporte',c.vt,'Desconto de até 6% do salário base.',`${R(d.salario)} × ${String(d.vtPct).replace('.',',')}% = ${R(c.vt)}`]];
  if(c.outros>0)desc.push(['Outros descontos',c.outros,'Descontos adicionais lançados pela empresa.',`Valor informado pela empresa: ${R(c.outros)}`]);
  const fgts=['FGTS do mês (8%)',c.bruto*.08,'O FGTS é um depósito que a empresa faz em uma conta no seu nome, além do seu salário. Ele não é descontado do que você recebe, por isso não entra no cálculo do líquido.',`${R(c.bruto)} × 8% = ${R(c.bruto*.08)}\nDepositado pela empresa na sua conta do FGTS (Caixa).\nNão reduz o seu líquido.`,1];
@@ -1114,7 +1129,7 @@ $('em-mes').addEventListener('change',pintaDias);
 function pintaEmp(){const d=lerEmp(),c=compute(d);
  $('em-inss').disabled=d.inssAuto;$('em-irrf').disabled=d.irrfAuto;
  if(d.inssAuto)$('em-inss').value=c.inssAut.toFixed(2);
- if(d.irrfAuto)$('em-irrf').value=Math.max(0,c.ir.v).toFixed(2);
+ if(d.irrfAuto)$('em-irrf').value=c.ir.v.toFixed(2);
  $('em-liq').textContent=R(c.liq);$('em-det').textContent=`Bruto ${R(c.bruto)} · Descontos ${R(c.desc)}`}
 function salvaEmp(){const d=lerEmp();
  if(!d.nome){toast('Informe o nome do trabalhador');$('em-nome').focus();return}
